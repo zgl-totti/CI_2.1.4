@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+<script type="text/javascript" src="<?php echo base_url('statics/ggl/js/jquery-1.7.2.min.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('statics/ggl/js/dal.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('statics/ggl/js/util.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('statics/ggl/js/bll.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('statics/ggl/js/formValidator-4.0.1.min.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('statics/ggl/js/formValidatorRegex.js');?>"></script>
+<title>刮刮卡</title>
+<link href="<?php echo base_url('statics/ggl/style/style.css')?>" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div style="display:none;">
+<!-- <img src="images/0.jpg">
+<img src="images/2.jpg">
+<img src="images/1.jpg"> -->
+</div>
+
+<!--活动介绍 开始-->
+<div class="mainwrap" style="display:block" id="conOne">
+  <div class="zhongjiang">刮刮卡</div>
+  <p class="jieshao">活动介绍：</p>
+  <p class="jieshaonr">......！！！</p>
+  <br>
+  <p><span class="jieshao">一等奖</span><span class="jieshaonr">xxx（每日限3人）</span></p>
+  <br>
+  <p><span class="jieshao">二等奖</span><span class="jieshaonr">xxx（每日限5人）</span></p>
+  <div class="lingjiang stylepad">
+    <div class="inputphone">
+    <ul>
+    <li>
+	<input type="tel" placeholder="请输入手机号码" id="onePhone" value="" size="11" class="phonetnumber" maxlength="11"  />
+	<input type="hidden" id="userid" value="zhangshan" />
+		</li>
+     <li id="onePhoneTip" style="color:#2be200;"></li></ul></div>
+    <p>请输入正确的手机号码，该手机号码将作为
+      领奖凭证。刮奖开始后，请于<span class="stylefont22">5分钟内</span>完成操作，否则刮奖无效。</p>
+	<input value="开始刮奖" type="Submit" id="btnOne" class="buttongua">
+    <input value="加载中..." type="button" id="btnOneGray" class="buttonguagray" style="display:none;">
+  </div>
+</div>
+<!--活动介绍 结束--> 
+
+<!--刮奖 开始-->
+<div class="mainwrap" style="display:none" id="conTwo">
+  <div class="wiwidesupport">&nbsp; <a href="#">&nbsp;</a></div>
+  <div class="guabg">
+    <div class="guawrap">
+      <ul>
+        <li class="guafont">刮奖区</li>
+        <li class="guajiangqu" style="display:"><canvas id="container">加载中。。。。</canvas></li>
+        <li class="guajiangqu11" style="display:none">谢谢参与</li>
+        <li class="guajiangqu22" style="display:none">一等奖</li>
+      </ul>
+    </div>
+  </div>
+  <!--此处按钮可换灰色--> 
+  <div class="buttongua" id="btnTwo" style="display:none;">兑奖</div>
+  <div class="buttonguagray" id="btnTwoGray" style="display:none;">兑奖</div>
+  </div>
+
+ <div class="mainwrap styleheight" style="display:none" id="conThree"> 
+  <!--获奖层 开始-->
+  <div class="mainwrapdiv ">
+    <div class="huode">
+      <ul>
+        <li>恭喜您获得:</li>
+        <li class="jiangpin" id="threePrize">&nbsp;<li>
+      </ul>
+    </div>
+    <div class="lingjiang">
+      <p>领奖地点：<br>
+        <span class="stylefont11">xxx</span></p>
+      <p>领奖时间：<br>
+        <span class="stylefont11">xx年xx月xx日</span></p>
+      <p>领奖方式：<br>
+        <span class="stylefont11">请凭此页面到xx兑奖</span></p>
+    </div>
+  </div><!--获奖层 结束--> 
+</div>
+    
+<div class="mainwrap" style="display:none" id="conFour"> 
+  <!--超时提示 开始-->
+  <div class="mainwrap styleheight" style="display:">
+    <br><p class="chaoshi" > 对不起，您已经超时！ </p>   
+  </div>
+  <!--超时提示 结束--> 
+</div>
+<!--刮奖 结束-->
+
+<script>
+
+bll.container = document.getElementById("container");
+bll.objimage = document.createElement('img');
+bll.objimage.src = "images/0.jpg";
+bll.threePrize = document.getElementById("threePrize");
+//bll.objimage.addEventListener('load', bll.Run, false);
+
+$(document).ready(function(){	
+	$.formValidator.initConfig({submitButtonID:"btnOne",debug:true,onSuccess:function(){bll.Run();},onError:function(){}});
+	$("#onePhone").formValidator({onShow:"请输入手机号！",onFocus:"请输入手机号！"}).regexValidator({regExp:"^\\d{7,11}$",onError:"手机号错误！"});
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+@charset "gb2312";
+/*===========style.css  --Greated by Mozehua  2014-06-26==============*/
+body{font-size:32px;line-height:40px;font-family:Î¢ÈíÑÅºÚ;background:#091020}
+div.header_fixed{width:640px;height:70px;background:url(../images/header.png);position:fixed;z-index:999;top:0px;left:50%;margin-left:-320px;}
+div.fixed_left{width:450px;height:70px;color:#676e76;font-size:17px;background:url(../images/ab.png) no-repeat left center;float:left;margin-left:15px;}
+span.fixspan_1{font-size:23px;color:#3b4552;padding-left:60px;}
+span.count{display:inline-block;padding-left:13px;line-height:23px;vertical-align:top;}
+.fixed_left p{padding-left:70px;}
+.fixed_left p img{vertical-align:top;}
+a.todl{display:block;width:124px;height:57px;text-align:center;font-size:31px;font-weight:bold;color:#fff;line-height:57px;background:url(../images/bg_dl.png) no-repeat;float:right;margin-right:15px;margin-top:6px;}
+/*===========Ê×Ò³============*/
+*{padding:0px;margin:0px;}
+a:link{text-decoration:none}
+a:activite{text-decoration:none}
+a:hover{text-decoration:none}
+a:visited{text-decoration:none}
+ul{-webkit-padding-start:0px;-webkit-margin-before: 0em;-webkit-margin-after: 0em;}
+.clear_b{clear:both}
+.wrap{width:640px;position:relative;margin:0px auto;}
+#wrap{width:640px;height:auto;background:url(../images/sm_bg.jpg) no-repeat;position:relative;margin:0px auto;}
+.dla{display:block;width:322px;height:104px;text-align:center;font-size:48px;line-height:104px;color:#00fff6;background:url(../images/btn_download.png) no-repeat;position:absolute;bottom:210px;left:160px;}
+#banner{width:494px;height:276px; margin:50px auto;left:73px;}
+#slider{height:276px;position:absolute;}
+#slider li{width:494px;height:276px;}
+#slider-nav { height:15px;position:absolute; left:0px; bottom:270px; width:100%; z-index:9999; text-align:center;}
+#slider-nav a { background: url(../images/banb.png) no-repeat; display:inline-block; width:13px; height:13px;line-height:65px;margin:0px 2px;overflow:hidden;}
+#slider-nav a.activeSlide {background:url(../images/banbs.png) no-repeat;}
+.footer{width:640px;margin:25px auto;text-align:center;line-height:50px;color:#8397b3;font-size:25px;}
+.footer a{color:#8397b3;}
+
+/*============µ×²¿=============*/
+.copyright{height:88px;padding:0 0 0 45px;color:#8397b3;text-align:center;}
+.copyright p,.copyright a{display:block;float:left;line-height:25px;}
+.copyright p{text-align:left;font-size:18px;}
+.copyright img{width:165px;border:none}
+
+/* main_image */
+.main_visual{height:276px;overflow:hidden;position:relative;}
+.main_image{width:494px;height:276px;overflow:hidden;position:relative;}
+.main_image ul{width:9999px;height:276px;overflow:hidden;position:absolute;top:0px;left:0px}
+.main_image li{float:left;width:494px;height:276px;}
+.main_image li span{display:block;width:100%;height:276px}
+.main_image li a{display:block;width:100%;height:276px}
+
+div.flicking_con{position:absolute;top:285px;z-index:999;width:100%;height:13px; text-align:center}
+div.flicking_con a{width:13px;height:13px;margin:0 3px;padding:0;background:#0e1b3e;display:inline-block;text-indent:-1000px}
+div.flicking_con a.on{background:#36F;}
+
+
+/*===========ÄÚÈÝÒ³============*/
+.main_content{min-height:600px;padding-bottom:35px;background:url(../images/main_bg.jpg) no-repeat #CBD5DF;color:#133d6d;}
+h2{padding-top:145px;padding-bottom:20px;padding-left:30px;font-size:60px;}
+p{padding:0px 20px;}
+.imgp{text-align:center;padding:15px 0 5px 0}
+

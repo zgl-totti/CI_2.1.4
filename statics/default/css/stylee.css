@@ -1,0 +1,549 @@
+.container{
+	width: 100%;
+}
+.banner1{
+	width: 100%;
+	margin-bottom: 1%;
+}
+.gongneng{
+	width: 100%;
+}
+.jieshao{
+	width:24.6%;
+	height: 90px;
+	margin-right: 0.5%;
+	margin-top: 0.5%;
+	float: left;
+	background: #fff;
+	text-align: center;
+}
+.gongneng p{
+	font-size: 0.8em;
+	color: #545454;
+	margin:8px auto;
+}
+.gongneng img{
+	margin-top: 12px;
+
+}
+.contentt{
+	padding:0 4%;
+}
+
+
+.contentt .img{
+	width: 30%;
+	height: 103px;
+	overflow: hidden;
+	float: left;
+}
+.beijing{
+	padding-top:8px;
+	padding-bottom: 8px;
+	margin-bottom:3px;
+
+	background:#fff;float: left;
+
+	width: 92%;
+
+	background:#fff;
+	float: left;
+	width:92%;
+
+}
+.contentt .xinxi{
+	float: left;
+	margin-left: 4%;
+	width: 65%;
+}
+/*订单页面*/
+.biaoti{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	background: #d22222;
+	text-align: center;
+	font-size: 1.2em;
+	color: #fff;
+	z-index: 99;
+	font-size: 16px;
+}
+.biaoti span{
+	margin-left:-45px;
+	font-size:16px;
+}
+
+.biaoti a{
+	display:block;
+	float: left;
+	width: 60px;
+	height: 40px;
+	/*border-right: 2px solid #ac1c1c;*/
+	margin-top:5px;
+}
+
+.dingdan{
+	width:25%;
+	float: left;
+	height:90px;
+	background: #fff;
+	text-align: center;
+}
+.gongneng1 p{
+	font-size: 0.8em;
+	color: #545454;
+	margin:8px auto;
+}
+.dingdan img{
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+.img{
+	width: 30%;
+	float: left;
+	display: block;
+}
+.img img{
+	display: block;
+	float: left;
+}
+/*搜索页面*/
+.tong_yangshi{
+	color: #9a9a9a;
+	margin-top:15px;
+	width: 80%;
+	font-size:0.8em;
+	display:inline-block;
+	line-height: 2.0em;
+}
+.suosuo{
+	width: 75%;
+	height:1.8em;
+	margin-left: 2%;
+	font-size: 0.8em;
+	/*border-color: #fca0a0;*/
+	color: #fff;
+	background: #d22222;
+	border: 0;
+	border-bottom: 1px solid #fff;
+
+}
+.biaoti input::-webkit-input-placeholder  
+ {   
+    color: #fca0a0;   
+}  
+.tijiao{
+	width: 10%;
+	height: 2.0em;
+	border: 0;
+	padding: 5px;
+	color: #fff;
+	background:#d22222 url('http://aczm.medtu.com/statics/default/img/images/sousuo_03.png') no-repeat left bottom;
+	background-size:70%;
+}
+.fenlei_box{
+	position: fixed;
+	top:50px;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	background: #fff;
+}
+.fenlei{
+	width: 75%;
+	height: 1.5em;
+	margin:0 auto;
+	margin-top:10px;
+} 
+.fenlei .quanbu{
+	padding:2px 0;
+	width: 31%;
+	height: 1.7em;
+	line-height:  1.7em;
+	border:1px solid #d22222;
+	text-align: center;
+	font-size: 0.8em;
+	float: left;
+	border-radius:4px 0 0 4px;
+
+}
+.fenlei .renqi{
+	padding:2px 0;
+	width: 31%;
+	height: 1.7em;
+	line-height:  1.7em;
+	border:1px solid #d22222;
+	text-align: center;
+	font-size: 0.8em;
+	float: left;
+	margin-left:-1px;
+}
+.fenlei .jiage{
+	padding:2px 0;
+	width: 31%;
+	height: 1.7em;
+	line-height:  1.7em;
+	border:1px solid #d22222;
+	text-align: center;
+	font-size: 0.8em;
+	float: left;
+	margin-left:-1px;
+	border-radius:0 4px 4px 0;
+}
+.fenlei .active{
+	background: #d22222;
+	color: #fff;
+}
+/*详情页*/
+.fudong{
+	width: 100%;
+	float: left;
+}
+.xq_banner{
+	width: 100%;
+	height: 210px;
+	float: left;
+	background: #fff;
+	text-align: center;
+	/*line-height:210px;*/
+	/*position: relative;*/
+	overflow: hidden;
+}
+.xq_banner img{
+	/*position: absolute;*/
+	/*top:50%;*/
+	/*left: 50%;*/
+	/*display:inline-block;*/
+	/*width: 150px;*/
+	/*margin-top: -75px;*/
+	/*margin-left: -75px;*/
+}
+.shangpin_xx{
+	float: left;
+	margin-top: 10px;
+	height: 90px;
+	width: 92%;
+	padding:5px 4%;
+	background: #fff;
+	margin-bottom: 15px;
+}
+.shangpin_mc{
+	width: 100%;
+	color: #000000;
+	font-size: 1em;
+	
+}
+.biaoyu{
+	color: #f01010;
+	font-size: 0.8em;
+	line-height: 2em;
+}
+/*.jiage{
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #f01010;
+}*/
+.shangjia_xx{
+	float:left;
+	padding:10px 4% 5px 4%;
+	background: #fff;
+	width: 92%;
+}
+.shangjia_xx .dianming{
+	width:100%;
+	color: #000;
+	font-size: 1.0em;
+	float: left;
+	}
+.shangjia_xx .dianming img{
+	display:block;
+	float: left;
+	 }
+.shangjia_xx .dianming span{
+	margin-left: 10px;
+	display:block;
+	float: left;
+}
+.dpjs{
+	color: #9a9a9a;
+	font-size: 0.8em;
+	float: left;
+	line-height: 1.5em;
+	margin-top:5px;
+	float: left;
+}
+.dizi{
+	float: left;
+	margin-top:10px;
+}
+.dizi .weizi{
+	float: left;
+
+}
+.dizi .weizi img{
+	display: block;
+	float: left;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+.dizi .weizi p{
+	float: left;
+	font-size: 0.6em;
+	color: #9a9a9a;
+}
+.dizi .dianhua{
+	float: left;
+	margin-left: 10px;
+}
+.dizi .dianhua img{
+	display: block;
+	float: left;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+.dizi .dianhua p{
+	float: left;
+	font-size: 0.6em;
+	color: #9a9a9a;
+}
+.dizi .fenxiang{
+	float: left;
+	margin-left: 20px;
+}
+.dizi .fenxiang img{
+	display: block;
+	float: left;
+	margin-left: 6px;
+	margin-right: 6px;
+}
+.goumaii{
+	margin-top: 20px;
+	float: left;
+	width: 100%;
+}
+.goumai{
+	margin:0 auto;
+	width: 60%;
+	height: 2em;
+	background:#d22222;
+	font-size: 1.2em;
+	color: #fff;
+	text-align: center;
+	line-height:  2em;
+}
+/*提交订单*/
+.tijiaobox{
+	width: 70%;
+	margin-left:5%;
+	margin-right:5%;
+	margin-top: 100px;
+	background: #fff;
+	
+	padding:0 10%;
+	padding-top:20px;
+	float: left;
+	padding-bottom: 40px;
+}
+.neirongg{
+	width: 100%;
+	float: left;
+	margin-top: 20px;
+
+}
+.neirongg .danjia{
+	color: #2e2d2d;
+	font-size: 1.2em;
+	float: left;
+}
+.neirongg .danjia1{
+	font-size: 1.2em;
+	color: #d22222;
+	float: right;
+}
+.neirongg .yuan{
+	color: #2e2d2d;
+	font-size: 1.2em;
+	float: right;
+	margin-left: 10px;
+}
+.neirongg .jiahao{
+	float: right;
+	display: block;
+	width:20px;
+	font-size: 1.0em;
+	border-style: none;
+	height: 1.7em; 
+	border:1px solid #b5b5b5;
+	background: #fff;
+	border-radius: 0 5px 5px 0;
+
+}
+.neirongg .jianhao{
+	float: right;
+	display: block;
+	width: 20px;
+	font-size: 1.0em;
+	border-style: none; 
+	height: 1.7em;
+	border:1px solid #b5b5b5;
+	background: #fff;
+	margin-right: -1px;
+	border-radius: 5px 0 0 5px;
+}
+.neirongg .xianshi{
+	display:block;
+	float: right;
+	width: 30px;
+	font-size: 1.0em;
+	height: 1.55em;
+	border:1px solid #b5b5b5;
+	background: #fff;
+	margin-right: -1px;
+	text-align: center;
+	line-height: 1.7em;
+}
+.neirongg .dianhua{
+	display:block;
+	height: 25px;
+	width: 60%;
+	float: right;
+	font-size: 0.8em;
+	border:none;
+	border-bottom: 1px solid #b5b5b5;
+}
+.tijiaodingdan{
+	margin-top: 40px;
+	width: 100%;
+	font-size: 1.2em;
+	float: left;
+	height: 2em;
+	color: #fff;
+	background: #d22222;
+	text-align: center;
+	line-height: 2em;
+}
+/*关于我们*/
+.guanyu{
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 70px;
+}
+.guanyu_img{
+	width: 100%;
+}
+.guanyu p{
+	margin-top: 10px;
+	color: #545454;
+	font-size: 0.8em;
+	text-indent: 1.6em;
+	line-height: 1.6em;
+}
+/*个人详情*/
+.geren_xx{
+	width: 100%;
+	margin-top: 70px;
+	float: left;
+	
+	background: #fff;
+	padding:0 5%;
+
+}
+.geren_xx .touxiang{
+	width: 90%;
+	float: left;
+	background: #fff;
+	padding:3% 0;
+	border-bottom:1px solid #e8e8e8;
+	/*display: table-cell; 
+    vertical-align:middle;*/
+	
+}
+.touxiang p{
+	display: inline-block;
+	float: left;
+	margin-top:10%;
+}
+.touxiang .img{
+	float: right;
+	width: 25%;
+}
+.touxiang a{
+	display: inline-block;
+	float: right;
+	margin-left:5%;
+	margin-top:10%;
+}
+/*订单详情*/
+.xioabiaoti{
+	width: 95%;
+	padding-left:5%;
+	float: left;
+	background: #fff;
+	margin-top: 5px;
+	height: 30px;
+}
+.xioabiaoti span{
+	margin-top: 5px;
+	display: block;
+	height: 20px;
+	width: 10px;
+	background: #d22222;
+	float: left;
+}
+.xioabiaoti p{
+	float: left;
+	line-height: 30px;
+	color: #545454;
+	margin-left: 10px;
+}
+/*预约取款*/
+.yuyue-sj{
+	display: block;
+	height: 40px;
+	width: 78%;
+	margin-left: 10%;
+	border-radius: 5px;
+	border:1px solid #9a9a9a;
+	padding-left: 2%;
+}
+.tikuan{
+	display: block;
+	border: none;
+	border-radius: 5px;
+	margin-left: 10%;
+	width: 80%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	background: #d22222;
+	margin-top:50px;
+	color: #fff;
+	font-size: 1.2em;
+}
+/*红包互动*/
+.aactive{
+	height: 30px;
+	width: 90px;
+	color: #9a9a9a;
+	font-size: 1.0em;
+	margin-left: 10px;
+	margin-top: 10px;
+	text-align: center;
+	line-height: 30px;
+}
+.canjia{
+	height: 30px;
+	width: 90px;
+	margin-left: 10px;
+	text-align: center;
+	line-height: 30px;
+	margin-top:10px;
+	border:1px solid #d22222;
+	border-radius: 5px;
+}
+.control-group{
+	font-size: 14px;
+}

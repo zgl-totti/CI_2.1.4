@@ -1,0 +1,42 @@
+@charset "utf-8";
+/* CSS Document */
+
+	*{padding:0;margin:0}
+	body{
+		text-align:center
+	}
+	.ly-plate{
+		position:relative;
+		width:257px;
+		height:257px;
+		margin:0px auto;
+	}
+	.rotate-bg{
+		width:257px;
+		height:257px;
+		background:url('http://aczm.medtu.com/statics/images1/ly-plate.png');
+		background-size:257px 257px;
+		position:absolute;
+		top:0;
+		left:0
+	}
+	.ly-plate div.lottery-star{
+		width: 108px;
+		height: 108px;
+		position: absolute;
+		top: 75px;
+		left:75px;
+	/*text-indent:-999em;
+		overflow:hidden;
+		background:url('http://aczm.medtu.com/statics/images1/rotate-static.png');
+		-webkit-transform:rotate(0deg);*/
+		outline:none
+	}
+	.ly-plate div.lottery-star #lotteryBtn{
+		width: 108px;
+		cursor: pointer;
+		position: absolute;
+		top:0;
+		left:0;
+		display:inline-block;
+	}

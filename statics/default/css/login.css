@@ -1,0 +1,52 @@
+body{
+	background: #f3f3f3;
+	font-family: Arial "Microsoft Yahei" sans-serif;
+	font-size: 16px;
+	padding: 0;
+	margin: 0;
+}
+.main{
+	width: 1000px;
+	height: 750px;
+	margin: 0 auto;
+	background: url(../img/login_bg.jpg);
+}
+form{                
+	padding-top: 300px;
+	padding-left: 300px;
+}
+dl{
+	white-space: nowrap;
+}
+dt,dd{
+	display: inline-block;
+	vertical-align: middle;
+}
+dd{
+	margin-left: 20px;
+}
+dt{
+	min-width: 4em;
+	text-align: right;
+	font-family: "微软雅黑";
+	color: #6D523F;
+}
+input{
+	width: 250px;
+	height: 35px;
+	border-radius: 5px;
+	border: 1px solid black;
+	background: white;
+	padding-left:5px;
+}
+.btn-small{
+	width: 160px;
+	height: 45px;
+	margin-top: 15px;
+	border-radius: 5px;
+	border: none;
+	background: #6D523F;
+	color: white;
+	font: inherit;
+	cursor: pointer;
+}

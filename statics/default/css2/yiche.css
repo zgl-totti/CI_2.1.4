@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*通用样式*/
+/* 样式初使化 */
+html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, address, big, cite, code, del, em, font, img, ins, small, strong, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, input, textarea, select {margin:0;padding:0;box-sizing: border-box;}
+html{height:100%;}
+body{color:#707070;font-family:微软雅黑,'Heiti SC',黑体,Arial; font-size:62.5%;/*10 ÷ 16 × 100% = 62.5%*/}
+ol,ul,li{list-style:none outside none;}
+a{text-decoration:none;color:inherit;}
+img{border:none;vertical-align:middle;max-width:100%;height: auto;width: auto\9; /* ie8 */ }
+table{border-collapse:collapse;}
+tr,td,th{padding:0;margin:0;}
+h1,h2,h3,h4,h5,h6{font-weight:normal;}
+input,textarea,select,button{border:1px solid #CCC;font-family:微软雅黑,'Heiti SC',黑体,Arial;padding:0;margin:0;}
+.fl { float:left;}
+.fr{ float:right;}
+.cf{overflow: hidden;}
+a{ color:#FFF; text-decoration:none;}
+a:hover{}
+img {
+max-width: 100%;
+height: auto;
+width:auto\9; /* ie8 */
+-ms-interpolation-mode:bicubic;/*为了照顾ie图片缩放失真*/
+vertical-align:top;
+}
+/*====================首页样式====================*/
+
+/*头部*/
+.nav{height:50px;background: #d22222;}
+.nav .back{float:left;vertical-align: middle;text-indent: 1.2rem;padding-top: 15px;}
+.nav .back span{padding-left: 15px;color:#ffffff;}
+.banner-box{width:100%;}
+.tel{margin:8.5% 9% 0;background: #d22222;height:70px;border-radius: 10px;text-align: center;line-height: 70px;font-size: 1.5rem;color:#ffffff;}
+.pointer{margin:0 9% 0;height:60px;line-height: 60px;text-align: center;font-size: 1.2rem;}
+
+
+
+
+
+
+
+
+
+
+
+

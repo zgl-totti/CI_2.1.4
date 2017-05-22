@@ -1,0 +1,375 @@
+<?php 
+$tempci	=	& get_instance(); 
+templates('global','header');
+templates('global','top');
+
+?>
+<link rel="stylesheet" href="<?php echo base_url('statics/global/style/patients.css');?>" type="text/css"/>
+<link rel="stylesheet" href="<?php echo base_url('statics/global/js/manhuaDate/manhuaDate.1.0.css');?>" type="text/css"/>
+<div class="main-board">
+	<?php
+		templates('home','cleft');
+	?>
+	<div class="dataview-board inline-box addpatients">
+		<div class="inner">
+			
+			<div class="item-list managepa">
+				<form action="<?php echo site_url('home/edit')?>" method="post" id='formID'>
+					<table class='table-cont' width="100%">
+                                                <tr>
+                                                    <td style="font-size:18px;"><b>患者基本信息</b></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+						</tr>
+						<tr>
+							<td>医院编号</td>
+							<td><input type='text' name='hospital' id='hospital' value='<?php echo $info['hospital'];?>' class="validate[required]" placeholder="医院编号" data-errormessage-value-missing="请输入医院编号" data-prompt-position="bottomLeft:3" autocomplete= "off"/></td>
+                                                        <td  style="">门诊号</td>
+							<td><input type='text' name='hnumber' id='hnumber' value='<?php echo $info['hnumber'];?>'  placeholder="门诊号"  /></td>
+						</tr>
+						<tr>
+							<td>姓名</td>
+							<td><input type='text' name='names' id='names' value='<?php echo $info['names'];?>' class="validate[required]" placeholder="姓名" data-errormessage-value-missing="请输入姓名" data-prompt-position="bottomLeft:3" autocomplete= "off"/></td>
+							<td>性别</td>
+							<td>
+								<input type='radio' name='sex' value="1" id="sex_1" class='sex validate[required]' <?php if($info['sex'] && $info['sex'] == 1){ echo 'checked';}?>/>
+								<label for="sex_1">男</label>
+								
+								<input type='radio' name='sex' value="2" id="sex_2" class='sex validate[required]' <?php if($info['sex'] && $info['sex'] == 2){ echo 'checked';}?>/>
+								<label for="sex_2">女</label>
+							</td>
+						</tr>
+						<tr>
+                                                        <td>年龄</td>
+							<td><input type='text' name='age' id='age' value='<?php echo $info['age'];?>'  placeholder="年龄"  /></td>
+							<td>糖尿病</td>
+							<td>
+								<input type='radio' name='mellitus' value="1" id="mellitus_1" class='sex validate[required]' <?php if($info['mellitus'] && $info['mellitus'] == 1){ echo 'checked';}?> />
+								<label for="mellitus_1">1 型</label>
+								
+								<input type='radio' name='mellitus' value="2" id="mellitus_2" class='sex validate[required]' <?php if($info['mellitus'] && $info['mellitus'] == 2){ echo 'checked';}?>/>
+								<label for="mellitus_2">2 型</label>
+							</td>
+						</tr>
+						
+						<tr>
+                                                    <td style="font-size:18px;"><b>第一部分</b> 神经病变症状</td>
+                                                        <td></td>
+						</tr>
+						
+						<tr>
+							<td>主要症状</td>
+							<td colspan='3'>
+                                                            <input type="radio" name="symptoms" value="1" <?php if($info['symptoms'] && $info['symptoms'] == 1){ echo 'checked';}?>>麻木&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="symptoms" value="2" <?php if($info['symptoms'] && $info['symptoms'] == 2){ echo 'checked';}?>>疼痛&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="symptoms" value="3" <?php if($info['symptoms'] && $info['symptoms'] == 3){ echo 'checked';}?>>感觉异常&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="symptoms" value="4" <?php if($info['symptoms'] && $info['symptoms'] == 4){ echo 'checked';}?>>针刺感&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="symptoms" value="5" <?php if($info['symptoms'] && $info['symptoms'] == 5){ echo 'checked';}?>>其他&nbsp;&nbsp;&nbsp;
+                                                        </td>
+						</tr>
+                                                <tr>
+							<td>分布方式</td>
+							<td colspan='3'>
+                                                            <input type="radio" name="distr" value="1" <?php if($info['distr'] && $info['distr'] == 1){ echo 'checked';}?>>近端&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="distr" value="2" <?php if($info['distr'] && $info['distr'] == 2){ echo 'checked';}?>>远端&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="distr" value="3" <?php if($info['distr'] && $info['distr'] == 3){ echo 'checked';}?>>对称&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="distr" value="4" <?php if($info['distr'] && $info['distr'] == 4){ echo 'checked';}?>>不对称&nbsp;&nbsp;&nbsp;
+                                                        </td>
+						</tr>
+                                                <tr>
+                                                    <td style="font-size:18px;">判断神经病变症状</td>
+                                                    <td colspan='3'>									
+										<select  tabindex="1" name="changes" id="changes">
+                                        
+										<option value="0" <?php if($info['drinking'] == 0){echo "selected = 'selected'";} ?>>未知</option>
+
+										<option value="1" <?php if($info['drinking'] == 1){echo "selected = 'selected'";} ?>>有</option>
+										
+										<option value="2" <?php if($info['drinking'] == 2){echo "selected = 'selected'";} ?>>无</option>
+									
+										</select></td>
+						</tr>
+                                                <tbody id = "two" style="display:none">
+                                                <tr>
+                                                    <td style="font-size:18px;"><b>第二部分</b> 鉴别诊断既往病史</td>
+                                                    <td></td>
+						</tr>
+                                                <tr>
+							<td>骨科相关病史</td>
+							<td colspan='3'>
+                                                            <input type="radio" name="bone" value="1" <?php if($info['bone'] && $info['bone'] == 1){ echo 'checked';}?>>脊柱退行性疾病 &nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="bone" value="2" <?php if($info['bone'] && $info['bone'] == 2){ echo 'checked';}?>>骨关节、肌腱病变&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="bone" value="3" <?php if($info['bone'] && $info['bone'] == 3){ echo 'checked';}?>>其它
+                                                        </td>
+						</tr>
+                                                <tr>
+							<td>神经内科相关病史</td>
+							<td colspan='3'>
+                                                            <input type="radio" name="nerve" value="1" <?php if($info['nerve'] && $info['nerve'] == 1){ echo 'checked';}?>>中枢神经病变&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="nerve" value="2" <?php if($info['nerve'] && $info['nerve'] == 2){ echo 'checked';}?>>明确的周围神经病变&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="nerve" value="3" <?php if($info['nerve'] && $info['nerve'] == 3){ echo 'checked';}?>>其它
+                                                        </td>
+						</tr>
+                                                <tr>
+							<td>其他相关病史</td>
+							<td colspan='3'>
+                                                            <input type="radio" name="other" value="1" <?php if($info['other'] && $info['other'] == 1){ echo 'checked';}?>>尿毒症&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="other" value="2" <?php if($info['other'] && $info['other'] == 2){ echo 'checked';}?>>甲状腺功能亢进／减退&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="other" value="3" <?php if($info['other'] && $info['other'] == 3){ echo 'checked';}?>>结核用药史&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="other" value="4" <?php if($info['other'] && $info['other'] == 4){ echo 'checked';}?>>肿瘤化疗用药史&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="other" value="5" <?php if($info['other'] && $info['other'] == 5){ echo 'checked';}?>>长期大量饮酒史&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="other" value="6" <?php if($info['other'] && $info['other'] == 6){ echo 'checked';}?>>遗传病史&nbsp;&nbsp;&nbsp;
+                                                            <input type="radio" name="other" value="7" <?php if($info['other'] && $info['other'] == 7){ echo 'checked';}?>>其他
+                                                        </td>
+						</tr>
+                                                </tbody>
+                                                
+                                                <tr>
+                                                    <td style="font-size:18px;"><b> 第三部分 </b>DSPN 筛查</td>
+                                                    <td></td>
+                                                    <td  width="35%"></td>
+						</tr>
+
+						<tr>
+							<td style="font-size:18px;">筛查项目</td>
+                                                        <td style="font-size:18px;">左侧</td>
+                                                        <td style="font-size:18px;">右侧</td>
+                                                </tr>
+                                                <tr>
+							<td>踝反射</td>
+                                                        <td>
+                                                                <input type='radio' name='anklel' value="1" id="anklel_1" class='sex validate[required]' <?php if($info['anklel'] && $info['anklel'] == 1){ echo 'checked';}?> />
+								<label for="anklel_1">缺失</label>
+								<input type='radio' name='anklel' value="2" id="anklel_2" class='sex validate[required]' <?php if($info['anklel'] && $info['anklel'] == 2){ echo 'checked';}?>/>
+								<label for="anklel_2">减弱</label>
+                                                                <input type='radio' name='anklel' value="3" id="anklel_3" class='sex validate[required]' <?php if($info['anklel'] && $info['anklel'] == 3){ echo 'checked';}?>/>
+								<label for="anklel_3">正常</label>
+                                                                <input type='radio' name='anklel' value="4" id="anklel_4" class='sex validate[required]' <?php if($info['anklel'] && $info['anklel'] == 4){ echo 'checked';}?>/>
+								<label for="anklel_4">亢奋</label>
+                                                        </td>
+                                                        <td>
+                                                                <input type='radio' name='ankler' value="1" id="ankler_1" class='sex validate[required]' <?php if($info['ankler'] && $info['ankler'] == 1){ echo 'checked';}?> />
+								<label for="ankler_1">缺失</label>
+								<input type='radio' name='ankler' value="2" id="ankler_2" class='sex validate[required]' <?php if($info['ankler'] && $info['ankler'] == 2){ echo 'checked';}?>/>
+								<label for="ankler_2">减弱</label>
+                                                                <input type='radio' name='ankler' value="3" id="ankler_3" class='sex validate[required]' <?php if($info['ankler'] && $info['ankler'] == 3){ echo 'checked';}?>/>
+								<label for="ankler_3">正常</label>
+                                                                <input type='radio' name='ankler' value="4" id="ankler_4" class='sex validate[required]' <?php if($info['ankler'] && $info['ankler'] == 4){ echo 'checked';}?>/>
+								<label for="ankler_4">亢奋</label>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>判断</b></td>
+                                                        <td>
+								<input type='radio' name='ajudge' value="1" id="ajudge_1" class='sex validate[required]' <?php if($info['ajudge'] && $info['ajudge'] == 1){ echo 'checked';}?>/>
+                                                                <label for="ajudge_1"><b>阴性</b></label>
+                                                                <input type='radio' name='ajudge' value="2" id="ajudge_2" class='sex validate[required]' <?php if($info['ajudge'] && $info['ajudge'] == 2){ echo 'checked';}?>/>
+                                                                <label for="ajudge_2"><b>阳性</b></label>
+                                                        </td>
+                                                        <td  width="35%"></td>
+                                                </tr>
+                                                <tr>
+							<td>针刺痛觉</td>
+                                                        <td>
+                                                                <input type='radio' name='painl' value="1" id="painl_1" class='sex validate[required]' <?php if($info['painl'] && $info['painl'] == 1){ echo 'checked';}?> />
+								<label for="painl_1">缺失</label>
+								<input type='radio' name='painl' value="2" id="painl_2" class='sex validate[required]' <?php if($info['painl'] && $info['painl'] == 2){ echo 'checked';}?>/>
+								<label for="painl_2">存在</label>
+                                                        </td>
+                                                        <td>
+                                                                <input type='radio' name='painr' value="1" id="painr_1" class='sex validate[required]' <?php if($info['painr'] && $info['painr'] == 1){ echo 'checked';}?> />
+								<label for="painr_1">缺失</label>
+								<input type='radio' name='painr' value="2" id="painr_2" class='sex validate[required]' <?php if($info['painr'] && $info['painr'] == 2){ echo 'checked';}?>/>
+								<label for="painr_2">存在</label>
+                                                        </td>
+                                                        
+                                                </tr>
+                                                <tr>
+                                                    <td><b>判断</b></td>
+                                                        <td>
+								<input type='radio' name='pjudge' value="1" id="pjudge_1" class='sex validate[required]' <?php if($info['pjudge'] && $info['pjudge'] == 1){ echo 'checked';}?>/>
+                                                                <label for="pjudge_1"><b>阴性</b></label>
+                                                                <input type='radio' name='pjudge' value="2" id="pjudge_2" class='sex validate[required]' <?php if($info['pjudge'] && $info['pjudge'] == 2){ echo 'checked';}?>/>
+                                                                <label for="pjudge_2"><b>阳性</b></label>
+                                                        </td>
+                                                        <td  width="35%"></td>
+                                                </tr>
+                                                <tr>
+							<td>温度觉</td>
+                                                        <td>
+                                                                <input type='radio' name='temperaturel' value="1" id="temperaturel_1" class='sex validate[required]' <?php if($info['temperaturel'] && $info['temperaturel'] == 1){ echo 'checked';}?> />
+								<label for="temperaturel_1">正常</label>
+								<input type='radio' name='temperaturel' value="2" id="temperaturel_2" class='sex validate[required]' <?php if($info['temperaturel'] && $info['temperaturel'] == 2){ echo 'checked';}?>/>
+								<label for="temperaturel_2">异常</label>
+                                                        </td>
+                                                        <td>
+                                                                <input type='radio' name='temperaturer' value="1" id="temperaturer_1" class='sex validate[required]' <?php if($info['temperaturer'] && $info['temperaturer'] == 1){ echo 'checked';}?> />
+								<label for="temperaturer_1">正常</label>
+								<input type='radio' name='temperaturer' value="2" id="temperaturer_2" class='sex validate[required]' <?php if($info['temperaturer'] && $info['temperaturer'] == 2){ echo 'checked';}?>/>
+								<label for="temperaturer_2">异常</label>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>判断</b></td>
+                                                        <td>
+								<input type='radio' name='tjudge' value="1" id="tjudge_1" class='sex validate[required]' <?php if($info['tjudge'] && $info['tjudge'] == 1){ echo 'checked';}?>/>
+                                                                <label for="tjudge_1"><b>阴性</b></label>
+                                                                <input type='radio' name='tjudge' value="2" id="tjudge_2" class='sex validate[required]' <?php if($info['tjudge'] && $info['tjudge'] == 2){ echo 'checked';}?>/>
+                                                                <label for="tjudge_2"><b>阳性</b></label>
+                                                        </td>
+                                                        <td  width="35%"></td>
+                                                </tr>
+                                                <tr>
+							<td>振动觉</td>
+                                                        <td>
+                                                                <input type='radio' name='vibrationl' value="1" id="vibrationl_1" class='sex validate[required]' <?php if($info['vibrationl'] && $info['vibrationl'] == 1){ echo 'checked';}?> />
+								<label for="vibrationl_1">存在</label>
+								<input type='radio' name='vibrationl' value="2" id="vibrationl_2" class='sex validate[required]' <?php if($info['vibrationl'] && $info['vibrationl'] == 2){ echo 'checked';}?>/>
+								<label for="vibrationl_2">缺失</label>
+                                                        </td>
+                                                        <td>
+                                                                <input type='radio' name='vibrationr' value="1" id="vibrationr_1" class='sex validate[required]' <?php if($info['vibrationr'] && $info['vibrationr'] == 1){ echo 'checked';}?> />
+								<label for="vibrationr_1">存在</label>
+								<input type='radio' name='vibrationr' value="2" id="vibrationr_2" class='sex validate[required]' <?php if($info['vibrationr'] && $info['vibrationr'] == 2){ echo 'checked';}?>/>
+								<label for="vibrationr_2">缺失</label>
+                                                        </td>
+                                                        
+                                                </tr>
+                                                <tr>
+                                                    <td><b>判断</b></td>
+                                                        <td>
+								<input type='radio' name='vjudge' value="1" id="vjudge_1" class='sex validate[required]' <?php if($info['vjudge'] && $info['vjudge'] == 1){ echo 'checked';}?>/>
+                                                                <label for="vjudge_1"><b>阴性</b></label>
+                                                                <input type='radio' name='vjudge' value="2" id="vjudge_2" class='sex validate[required]' <?php if($info['vjudge'] && $info['vjudge'] == 2){ echo 'checked';}?>/>
+                                                                <label for="vjudge_2"><b>阳性</b></label>
+                                                        </td>
+                                                        <td  width="35%"></td>
+                                                </tr>
+                                                <tr>
+							<td>压力觉</td>
+                                                        <td>
+                                                                <input type='radio' name='pressurel' value="1" id="pressurel_1" class='sex validate[required]' <?php if($info['pressurel'] && $info['pressurel'] == 1){ echo 'checked';}?> />
+								<label for="pressurel_1">存在</label>
+								<input type='radio' name='pressurel' value="2" id="pressurel_2" class='sex validate[required]' <?php if($info['pressurel'] && $info['pressurel'] == 2){ echo 'checked';}?>/>
+								<label for="pressurel_2">缺失</label>
+                                                        </td>
+                                                        <td>
+                                                                <input type='radio' name='pressurer' value="1" id="pressurer_1" class='sex validate[required]' <?php if($info['pressurer'] && $info['pressurer'] == 1){ echo 'checked';}?> />
+								<label for="pressurer_1">存在</label>
+								<input type='radio' name='pressurer' value="2" id="pressurer_2" class='sex validate[required]' <?php if($info['pressurer'] && $info['pressurer'] == 2){ echo 'checked';}?>/>
+								<label for="pressurer_2">缺失</label>
+                                                        </td>
+                                                        
+                                                </tr>
+                                                <tr>
+                                                    <td><b>判断</b></td>
+                                                        <td>
+								<input type='radio' name='ejudge' value="1" id="ejudge_1" class='sex validate[required]' <?php if($info['ejudge'] && $info['ejudge'] == 1){ echo 'checked';}?>/>
+                                                                <label for="ejudge_1"><b>阴性</b></label>
+                                                                <input type='radio' name='ejudge' value="2" id="ejudge_2" class='sex validate[required]' <?php if($info['ejudge'] && $info['ejudge'] == 2){ echo 'checked';}?>/>
+                                                                <label for="ejudge_2"><b>阳性</b></label>
+                                                        </td>
+                                                        <td  width="35%"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>完成时间</td>
+                                                    <td>
+							        <input type='text' name='ftime' id='ftime' class="" placeholder="" data-errormessage-value-missing="" data-prompt-position="bottomLeft:3" autocomplete= "off" value="<?php echo date('Y-m-d');?>"/>
+                                                    </td>
+						</tr>
+						<tr id = "desc" <?php if($info['tumor_family'] != 1){?>style="display:none"<?php } ?>>
+							<td>具体描述</td>
+							<td colspan='3'><input type='text' name='desc' style='width:60%;' value='<?php echo $info['desc'];?>'/></td>
+							
+						</tr>
+						
+						<tr>
+							<td>其他疾病</td>
+								<td>									
+										<select  tabindex="1" name="other_disease" id="other_disease">
+                                        
+										<option value="0" <?php if($info['other_disease'] == 0){echo "selected = 'selected'";} ?>>未知</option>
+
+										<option value="1" <?php if($info['other_disease'] == 1){echo "selected = 'selected'";} ?>>有</option>
+										
+										<option value="2" <?php if($info['other_disease'] == 2){echo "selected = 'selected'";} ?>>无</option>
+									
+										</select>
+								</td>
+							<td id = "other"> <?php if($info['other_disease'] == 1){echo "其他疾病(多选)";} ?></td>
+							<td id = "disease"  width="35%">
+								<?php if($info['other_disease'] == 1 && $info['disease'] && in_array("炎症性肠病",$info['disease'])){echo '<input type="checkbox" name="disease[]" value="炎症性肠病" checked = "checked">炎症性肠病';}else{echo '<input type="checkbox" name="disease[]" value="炎症性肠病">炎症性肠病';} ?>
+								<?php if($info['other_disease'] == 1 && $info['disease']  && in_array("血吸虫病",$info['disease'])){echo '<input type="checkbox" name="disease[]" value="血吸虫病" checked = "checked">血吸虫病';}else{echo '<input type="checkbox" name="disease[]" value="血吸虫病">血吸虫病';} ?>
+								<?php if($info['other_disease'] == 1 && $info['disease']  && in_array("慢性胃窦炎",$info['disease'])){echo '<input type="checkbox" name="disease[]" value="慢性胃窦炎" checked = "checked">慢性胃窦炎';}else{echo '<input type="checkbox" name="disease[]" value="慢性胃窦炎">慢性胃窦炎';} ?>
+								<?php if($info['other_disease'] == 1 && $info['disease']  && in_array("慢性胃溃疡",$info['disease'])){echo '<input type="checkbox" name="disease[]" value="慢性胃溃疡" checked = "checked">慢性胃溃疡';}else{echo '<input type="checkbox" name="disease[]" value="慢性胃溃疡">慢性胃溃疡';} ?>
+								<?php if($info['other_disease'] == 1 && $info['disease']  && in_array("高血压",$info['disease'])){echo '<input type="checkbox" name="disease[]" value="高血压" checked = "checked">高血压';}else{echo '<input type="checkbox" name="disease[]" value="高血压">高血压';} ?>
+								<?php if($info['other_disease'] == 1 && $info['disease']  && in_array("糖尿病",$info['disease'])){echo '<input type="checkbox" name="disease[]" value="糖尿病" checked = "checked">糖尿病';}else{echo '<input type="checkbox" name="disease[]" value="糖尿病">糖尿病';} ?>
+								<?php if($info['other_disease'] == 1 && $info['disease']  && in_array("心血管疾病",$info['disease'])){echo '<input type="checkbox" name="disease[]" value="心血管疾病" checked = "checked">心血管疾病';}else{echo '<input type="checkbox" name="disease[]" value="心血管疾病">心血管疾病';} ?>
+								<?php if($info['other_disease'] == 1 && $info['disease']  && in_array("肾功能不全",$info['disease'])){echo '<input type="checkbox" name="disease[]" value="肾功能不全" checked = "checked">肾功能不全';}else{echo '<input type="checkbox" name="disease[]" value="肾功能不全">肾功能不全';} ?>
+								<?php if($info['other_disease'] == 1 && $info['disease']  && in_array("阑尾切除史",$info['disease'])){echo '<input type="checkbox" name="disease[]" value="阑尾切除史" checked = "checked">阑尾切除史';}else{echo '<input type="checkbox" name="disease[]" value="阑尾切除史">阑尾切除史';} ?>
+								<?php if($info['other_disease'] == 1 && $info['disease']  && in_array("胆囊切除史",$info['disease'])){echo '<input type="checkbox" name="disease[]" value="胆囊切除史" checked = "checked">胆囊切除史';}else{echo '<input type="checkbox" name="disease[]" value="胆囊切除史">胆囊切除史';} ?>
+								<?php if($info['other_disease'] == 1 && $info['disease']  && in_array("呼吸系统疾病",$info['disease'])){echo '<input type="checkbox" name="disease[]" value="呼吸系统疾病" checked = "checked">呼吸系统疾病';}else{echo '<input type="checkbox" name="disease[]" value="呼吸系统疾病">呼吸系统疾病';} ?>
+							</td>
+						</tr>
+					</table>
+				
+					<input type="submit" class="" value="修改" name='dosubmit'/>
+					
+					<input type="button" name="Submit" onclick="javascript:history.back(-1);" value="返回">
+				</form>
+			</div><!-- list end -->
+		</div><!-- inner end -->	
+	</div><!-- dataview end -->
+</div>
+
+<script src="<?php echo base_url('statics/global/js/jquery.validationEngine-zh_CN.js');?>" type="text/javascript" charset="utf-8"></script>
+<script src="<?php echo base_url('statics/global/js/jquery.validationEngine.js');?>" type="text/javascript" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+	$('#tumor_history').change(function(){
+		if($(this).val() == 1){
+			$("#history").html('肿瘤疾病(多选)');
+			$("#tumor").html('<input type="checkbox" name="tumor[]" value="肠息肉">肠息肉 <input type="checkbox" name="tumor[]" value="结肠癌">结肠癌 <input type="checkbox" name="tumor[]" value="家族性腺瘤性息肉">家族性腺瘤性息肉 <input type="checkbox" name="tumor[]" value="胃壁息肉">胃壁息肉 <input type="checkbox" name="tumor[]" value="肺癌">肺癌 <input type="checkbox" name="tumor[]" value="肾癌">肾癌 <input type="checkbox" name="tumor[]" value="膀胱癌">膀胱癌 <input type="checkbox" name="tumor[]" value="前列腺癌">前列腺癌 <input type="checkbox" name="tumor[]" value="子宫癌">子宫癌 <input type="checkbox" name="tumor[]" value="宫颈癌">宫颈癌 <input type="checkbox" name="tumor[]" value="卵巢癌">卵巢癌 <input type="checkbox" name="tumor[]" value="甲状腺癌史">甲状腺癌史 <input type="checkbox" name="tumor[]" value="头颈部肿瘤">头颈部肿瘤 <input type="checkbox" name="tumor[]" value="霍奇金淋巴瘤史">霍奇金淋巴瘤史 <input type="checkbox" name="tumor[]" value="非霍奇金淋巴瘤史">非霍奇金淋巴瘤史 <input type="checkbox" name="tumor[]" value="其他肿瘤">其他肿瘤');
+			}else{
+			$("#history").html('');
+			$("#tumor").html('');
+		};
+	});
+	$('#other_disease').change(function(){
+		if($(this).val() == 1){
+			$("#other").html('其他疾病(多选)');
+			$("#disease").html('<input type="checkbox" name="disease[]" value="炎症性肠病">炎症性肠病 <input type="checkbox" name="disease[]" value="血吸虫病">血吸虫病 <input type="checkbox" name="disease[]" value="慢性胃窦炎">慢性胃窦炎 <input type="checkbox" name="disease[]" value="慢性胃溃疡">慢性胃溃疡 <input type="checkbox" name="disease[]" value="糖尿病">糖尿病 <input type="checkbox" name="disease[]" value="高血压">高血压 <input type="checkbox" name="disease[]" value="心血管疾病">心血管疾病 <input type="checkbox" name="disease[]" value="肾功能不全">肾功能不全 <input type="checkbox" name="disease[]" value="呼吸系统疾病">呼吸系统疾病 <input type="checkbox" name="disease[]" value="胆囊切除史">胆囊切除史 <input type="checkbox" name="disease[]" value="阑尾切除史">阑尾切除史');
+		}else{
+			$("#disease").html('');
+			$("#disease").html('');
+		};
+	});
+	
+	$('#tumor_family').change(function(){
+		if($(this).val() == 1){
+			$("#desc").show();
+		}else{
+			$("#desc").hide();
+		};
+	});	
+});
+</script>
+
+
+<script>
+jQuery(document).ready(function(){
+	jQuery('#formID').validationEngine({
+		autoHidePrompt: true,
+		autoHideDelay:'3000'
+	});
+	
+});
+</script>
+
+
+
+
+<?php 
+templates('global','footer');
+?>
