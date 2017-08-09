@@ -62,7 +62,7 @@ class Pubmed extends CI_Controller {
         }
 
 		$result['status'] = 1;
-        $result['info']     =   $data;
+        $result['info'] = $data;
 		
 		exit(json_encode($result));
 	}
