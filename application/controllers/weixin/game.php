@@ -14,6 +14,7 @@ class Game extends CI_Controller {
 	public $userid;
 	//游戏id
 	public $playid;
+
 	/**
 	* 
 	* @author		wangteng
@@ -24,6 +25,7 @@ class Game extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
+
 		$userid	=	$this->input->cookie('user',true);
         //$this->userid	=	$userid ? aesDecode($userid) : '1';
 		$this->load->model('Weixininfo_model');
@@ -79,6 +81,7 @@ class Game extends CI_Controller {
 			exit(json_encode($result));
 		}
 	}
+
 	/**
 	 * 添加游戏
 	 * @author		wangteng
@@ -109,6 +112,7 @@ class Game extends CI_Controller {
 		}
         templates('weixin/game','add_game');
 	}
+
 	/**
 	 * 添加游戏奖品
 	 * @author		wangteng
@@ -143,6 +147,7 @@ class Game extends CI_Controller {
 		$data=$this->Game_model->lists();
 		templates('weixin/game','add_prize',$data);
 	}
+
 	/**
 	 * 游戏奖品列表页
 	 * @author		wangteng
@@ -229,7 +234,6 @@ class Game extends CI_Controller {
 		$data['info']['prize']=$prize;
 		$this->load->vars($data);
 		templates('weixin/game','show');
-
 	}
 	
 	/**

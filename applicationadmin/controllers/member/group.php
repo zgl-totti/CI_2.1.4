@@ -10,6 +10,7 @@
 class Group extends CI_Controller {
 	public $before_filter	=	'admin';
 	public $_userid;
+
 	/**
 	* 
 	* @author		wangyangyang
@@ -22,9 +23,7 @@ class Group extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('Member_group_model');
-
 		$this->_userid	=	$this->session->userdata('userid');
-
 	}
 
 	/**
@@ -38,12 +37,8 @@ class Group extends CI_Controller {
 	public function index($page = ''){
 		$pagesize	=	10;
 		$page		=	$page ? intval($page) : 1;
-		
 		$data	=	$this->Member_group_model->lists('',$page,$pagesize);
-		
-		
 		$data['pages']	=	pages($data['total'],$pagesize,4,'/member/main/index');
-		
 		$this->load->view('group/index',$data);
 	}
 
@@ -71,32 +66,24 @@ class Group extends CI_Controller {
 			$info['update_time']	=	time();
 
 			$update	=	$this->Member_group_model->updates($info,$id);
-
 			if ( $update ) {
 				//	记录后台操作日志
 				manage_log('member','group','edit','/member/group/edit','修改用户组信息',array('id'=>$id));
 			}
-
 			$data	=	array();
 			$data['backurl']	=	site_aurl('member/group');
 			$data['message']	=	'修改成功';
-			
 			$this->load->view('global/message',$data);
 		}else{
 			//	获取用户组详细信息
 			$id		=	$id ? intval($id) : '';
-			
 			//	如果获取不到id值，直接跳转到所有列表页面
 			if ( !$id ) {
 				redirect(site_aurl('member/group'));
 				exit;
 			}
-
 			$where	=	array('id'=>$id);
-			
-			
 			$data['info']	=	$this->Member_group_model->get($where);
-			
 			$this->load->view('group/edit',$data);
 		}
 	}
@@ -112,7 +99,6 @@ class Group extends CI_Controller {
 	public function add(){
 		if ( isset($_POST['submit']) && $_POST['submit'] ) {
 			$post	=	$this->input->post(NULL,TRUE);
-			
 			$info	=	array();
 			$info['title']	=	$post['title'];
 			$info['description']	=	$post['description'];
@@ -120,7 +106,6 @@ class Group extends CI_Controller {
 			$info['update_time']	=	time();
 
 			$id	=	$this->Member_group_model->add($info);
-
 			if ( $id ) {
 				//	记录后台操作日志
 				manage_log('member','group','add','/member/group/add','添加用户组',array('id'=>$id));
@@ -133,14 +118,10 @@ class Group extends CI_Controller {
 			$this->load->view('global/message',$data);
 		}else{
 			$data	=	array();
-			
 			$this->load->view('group/add',$data);
 		}
 	}
 
-	
-
-	
 	/**
 	* 删除用户组信息
 	* @author		wangyangyang
@@ -160,7 +141,6 @@ class Group extends CI_Controller {
 			}
 			
 			$deletes	=	$this->Member_group_model->deletes($idArr);
-			
 			if ( $deletes ) {
 				//	记录后台操作日志
 				manage_log('member','group','deletes','/member/group/deletes','删除用户组',json_encode($idArr));
@@ -185,7 +165,6 @@ class Group extends CI_Controller {
 
 		if ( isset($_POST['submit']) && $_POST['submit'] ) {
 			$data	=	$this->input->post(NULL,true);
-			
 			//	读权限
 			$addroile	=	isset($data['addroile']) && $data['addroile'] ? $data['addroile'] 
 				: '';
@@ -223,7 +202,6 @@ class Group extends CI_Controller {
 			$groupid	=	extractArray( $info, 'id' );
 			$insert	=	array();
 			foreach($groupid AS $key => $val){
-				
 				$insert[$key]['groupid']	=	$val;
 				$insert[$key]['read']		=	isset($addroile[$val]) && $addroile[$val]
 					? 1 : 0;
@@ -244,26 +222,19 @@ class Group extends CI_Controller {
 			}
 			
 			$rows	=	$this->Member_group_roile_model->insertall($insert);
-
 			if ( $rows ) {
 				//	记录后台操作日志
 				manage_log('member','group','roile','/member/group/roile','修改用户组权限','');
 			}
-			
 			redirect(site_url('member/group/roile'));
 			exit;
-
 		}else{
 			//	读取用户组信息
 			$data	=	$this->Member_group_model->lists('',1,1000);
-			
 			//	读取用户组权限信息
 			$info	=	$this->Member_group_roile_model->getall();
 			$info	=	$info ? handleArrayKey( $info, 'groupid' ) : '';
-
 			$data['roile']	=	$info;
-			
-
 			$this->load->view('group/roile',$data);
 		}
 	}

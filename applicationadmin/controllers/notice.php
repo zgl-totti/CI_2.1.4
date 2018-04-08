@@ -18,7 +18,6 @@ class Notice extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
-		
 	}
 
 	/**
@@ -33,7 +32,6 @@ class Notice extends CI_Controller {
 		echo '<pre>';
 		print_r('test');
 		exit;
-		
 	}
 
 	/**
@@ -46,13 +44,9 @@ class Notice extends CI_Controller {
 	*/
 	public function nopriv(){
 		$data	=	array();
-
 		$data['message']	=	'您无权限进行该操作';
-
 		$this->load->view('notice/index',$data);
 	}
-
-	
 }
 
 /* End of file notice.php */

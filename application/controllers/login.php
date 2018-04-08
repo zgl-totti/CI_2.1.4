@@ -10,7 +10,6 @@
 * @return
 */
 class Login extends CI_Controller {
-	
 	/**
 	* 
 	* @author	wangyangyang
@@ -23,7 +22,6 @@ class Login extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('Member_model');
-		
 	}
 
 	/**
@@ -36,10 +34,9 @@ class Login extends CI_Controller {
 	*/
 	public function index(){
 		$this->config->set_item('enable_query_strings',FALSE);
-		
+
 		$cookieuserid	=	$this->input->cookie('user',true);
 		$cookieuserid	=	aesDecode($cookieuserid);
-
 		if ( $cookieuserid && is_numeric($cookieuserid) ) {
 			redirect('/home');
 			exit;
@@ -98,8 +95,7 @@ class Login extends CI_Controller {
 					exit;
 				}
 			}
-			
-			
+
 			$cookies = array(
 					'name'   => 'user',
 					'value'  => aesencode($userinfo['userid']),
@@ -112,11 +108,8 @@ class Login extends CI_Controller {
 			templates('global','message',$data);
 			exit;
 		}
-
-
 		seo('登录');
 		templates('member','login');
-
 	}
 
 	/**
@@ -133,28 +126,16 @@ class Login extends CI_Controller {
                     'value'  => '',
                     'expire' => ''
                 );
-	
-		$this->input->set_cookie($cookies); 
-
+		$this->input->set_cookie($cookies);
 		redirect('/login');
 	}
 
-
-
-
-
-
 	public function sendcodes111(){
 		$mobile	=	$this->input->post('mobile',TRUE);
-
-
 		$result	=	array('status'=>'0');
-		/*print_r($mobile);echo '--';
-        print_r(is_mobile($mobile) );die;*/
 		if ( !$mobile || !is_mobile($mobile) ) {
 			exit(json_encode($result));
 		}
-
 		//	获取发送时间
 		$sendtimes	=	$this->session->userdata('sendtimes');
 		$ctimes		=	$sendtimes ? time() - $sendtimes : 0;
@@ -163,11 +144,9 @@ class Login extends CI_Controller {
 			$result['status'] = -1;
 			exit(json_encode($result));
 		}
-
 		//	发送短信
 		$message	=	'手机号为：'.$mobile.'，用户申请了贷款业务。（巩义农商银行）【UPTOSCI】';
 		Phone_Msg('18236918637',$message);//15938955271
-
 		$result['status']	=	1;
 		exit(json_encode($result));
 	}

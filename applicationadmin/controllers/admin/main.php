@@ -10,6 +10,7 @@
 class Main extends CI_Controller {
 	public $before_filter	=	'admin';
 	public $_userid;
+
 	/**
 	* 
 	* @author		wangyangyang
@@ -41,8 +42,7 @@ class Main extends CI_Controller {
 		$roleinfo	=	array();
 		if ( $userInfo && $userInfo['roleid'] ) {
 			$this->load->model('Role_model');
-			$roleinfo	=	$this->Role_model->get_role_one(
-				array('roleid'=>$userInfo['roleid']));
+			$roleinfo	=	$this->Role_model->get_role_one(array('roleid'=>$userInfo['roleid']));
 		}
 
 		if ( $roleinfo ) {
@@ -66,8 +66,6 @@ class Main extends CI_Controller {
 		$this->Adminusers_model->logout();
 		redirect(site_aurl('login'));
 	}
-
-	
 }
 
 /* End of file main.php */

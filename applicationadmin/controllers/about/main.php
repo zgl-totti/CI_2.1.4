@@ -23,7 +23,6 @@ class Main extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('About_model');
-
 		$this->_userid	=	$this->session->userdata('userid');
 
 	}
@@ -53,11 +52,9 @@ class Main extends CI_Controller {
 			$contents	=	$contents ? htmlspecialchars($contents) : '';
 
 			$info['contents']	=	$contents;
- 
 			$info['dates']	=	date('Y-m-d');
 
 			$update	=	$this->About_model->update($info,array('id'=>$id));
-
 			if ( $update ) {
 				//	记录后台操作日志
 				manage_log('about','main','index','/about/main/index','修改关于我们',array('id'=>$id));
@@ -143,9 +140,7 @@ class Main extends CI_Controller {
 			$contents	=	$this->input->post('contents');
 			$contents	=	$contents ? htmlspecialchars($contents) : '';
 
-
 			$info['contents']	=	$contents;
-
 			$info['dates']	=	date('Y-m-d');
 
 			$update	=	$this->About_model->update($info,array('id'=>$id));
@@ -191,13 +186,10 @@ class Main extends CI_Controller {
 			$contents	=	$this->input->post('contents');
 			$contents	=	$contents ? htmlspecialchars($contents) : '';
 
-
 			$info['contents']	=	$contents;
-
 			$info['dates']	=	date('Y-m-d');
 
 			$update	=	$this->About_model->update($info,array('id'=>$id));
-
 			if ( $update ) {
 				//	记录后台操作日志
 				manage_log('about','main','banerders','/about/main/banerders','修改金燕卡业务介绍',array('id'=>$id));

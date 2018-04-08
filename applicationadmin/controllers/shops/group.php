@@ -23,9 +23,7 @@ class Group extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('Shops_group_model');
-
 		$this->_userid	=	$this->session->userdata('userid');
-
 	}
 
 	/**
@@ -37,10 +35,8 @@ class Group extends CI_Controller {
 	* @return		
 	*/
 	public function index($parentid = '0'){
-		
 		$where['parentid'] = intval($parentid);
 		$main	=	$this->Shops_group_model->lists($where);
-		
 		$arr	=	array();
 		$data	=	array();
 		$data['categorys']	=	'';
@@ -65,10 +61,7 @@ class Group extends CI_Controller {
 
 			$this->tree->init($array);
 			$data['categorys'] = $this->tree->get_tree($parentid, $str);
-			
 		}
-		
-		
 		$this->load->view('shops/group/index',$data);
 	}
 	
@@ -83,17 +76,13 @@ class Group extends CI_Controller {
 	public function listorder(){
 		if(isset($_POST['submit']) && $_POST['submit']) {
 			$model_field_sort	=	$this->input->post('listorders',TRUE);
-
 			//	更新排序
 			$listorder	=	$this->Shops_group_model->listorder($model_field_sort);
-			
 			if ( $listorder ) {
 				//	管理员后台操作日志记录
 				manage_log('shops','group','listorder','/shops/group/listorder','商铺组管理排序');
 			}
-
 			$data['message']	=	$listorder  ? 1 : 0;
-			
 			$this->load->view('shops/group/listorder',$data);
 		}else{
 			redirect(site_aurl('shops/group'));
@@ -123,7 +112,6 @@ class Group extends CI_Controller {
 				//	管理员后台操作日志记录
 				manage_log('shops','group','add','/shops/group/add','商铺组管理添加新商铺组',array('id'=>$insert));
 			}
-
 			$this->load->view('shops/group/add_action',$result);
 		}else{
 			$urlArr	=	get_segment_arr();
@@ -131,11 +119,9 @@ class Group extends CI_Controller {
 
 			$this->load->library('tree');
 			$main	=	$this->Shops_group_model->lists();
-
 			if ( !$main || !$main['info'] ) {
-//				redirect(site_aurl('admin/main'));
+                //redirect(site_aurl('admin/main'));
 			}
-			
 			//	上级菜单下拉选择
 			$array = array();
 			foreach($main['info'] as $r) {
@@ -146,8 +132,6 @@ class Group extends CI_Controller {
 			$str  = "<option value='\$id' \$selected>\$spacer \$cname</option>";
 			$this->tree->init($array);
 			$data['select_categorys'] = $this->tree->get_tree(0, $str);
-			
-
 			$this->load->view('shops/group/add',$data);
 		}
 	}
@@ -164,34 +148,27 @@ class Group extends CI_Controller {
 	public function edit(){
 		if ( isset($_POST['submit']) && $_POST['submit'] && $this->input->post('tableid')) {
 			$post	=	$this->input->post(NULL,TRUE);
-
 			$info			=	array();
 			$info['name']	=	$post['name'];
 			$info['display']	=	$post['display'] ? '1' : '0';
 			$info['content']		=	htmlspecialchars($post['contents']);
 			//	更新情况下时，需要判断下父菜单的情况
 			$old_info	=	$this->Shops_group_model->get($post['tableid']);
-			
 			if ( $post['parentid'] && $post['tableid'] && $post['parentid'] != $post['tableid'] ) {
 				$info['parentid']	=	$post['parentid'] ? intval($post['parentid']) : 0;
 			}
-
 			$updates	=	$this->Shops_group_model->update($info,$post['tableid']);
 			$result		=	array();
 			$result['message']	=	( $updates || $editlang ) ? 1 : 0;
-			
 			if ( $updates || $editlang) {
 				//	管理员后台操作日志记录
 				manage_log('shops','group','edit','/shops/group/edit','商铺组管理修改商铺组',array('id'=>$post['tableid']));
 			}
-
 			$this->load->view('shops/group/edit_action',$result);
 		}else{
 			$urlArr	=	get_segment_arr();
 			$id		=	isset($urlArr['4']) ? intval($urlArr['4']) : '';
-			
 			$this->load->library('tree');
-			
 			//	该字段信息
 			$info	=	$this->Shops_group_model->get($id);
 			if ( !$info ) {
@@ -211,7 +188,6 @@ class Group extends CI_Controller {
 			$str  = "<option value='\$id' \$selected>\$spacer \$cname</option>";
 			$this->tree->init($array);
 			$data['select_categorys'] = $this->tree->get_tree(0, $str);
-			
 			$this->load->view('shops/group/edit',$data);
 		}
 	}
@@ -228,7 +204,6 @@ class Group extends CI_Controller {
 		$urlArr		=	get_segment_arr();
 		$id			=	isset($urlArr['4']) ? intval($urlArr['4']) : '';
 		$info		=	'';
-
 		$result		=	array();
 		if ( $id ) {
 			//	查看该菜单信息，做日志记录使用
@@ -240,7 +215,6 @@ class Group extends CI_Controller {
 			//	管理员后台操作日志记录
 			manage_log('shops','group','deletes','/shops/group/deletes','商铺组管理删除商铺组',array('id'=>$id,'name'=>$mainInfo['name'],'cname'=>$mainInfo['name']));
 		}
-
 		$result['message']	=	$info ? 1 : 0;
 		$this->load->view('shops/group/delete_action',$result);
 	}

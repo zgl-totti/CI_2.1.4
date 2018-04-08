@@ -21,10 +21,8 @@ class Manage_user extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
-		
-		
-		$this->_userid	=	$this->session->userdata('userid');
 
+		$this->_userid	=	$this->session->userdata('userid');
 		$this->load->model('Admin_model');
 	}
 
@@ -54,7 +52,6 @@ class Manage_user extends CI_Controller {
 
 			$data['roleInfo']=	$roleInfo ? handleArrayKey($roleInfo,'roleid') : array();
 		}
-
 		$this->load->view('manage_user/index',$data);
 	}
 
@@ -103,7 +100,6 @@ class Manage_user extends CI_Controller {
 			
 			if ( $insertid ) {
 				$data['message']	=	'添加成功';
-
 				//	管理员后台操作日志记录
 				manage_log('admin','manage_user','add','/admin/manage_user/add','添加管理员',array('userid'=>$insertid,'username'=>$info['username']));
 
@@ -120,7 +116,6 @@ class Manage_user extends CI_Controller {
 			//	查看角色组未被禁用的数据
 			$where	=	array('disabled'=>0);
 			$data['role']	=	$this->Role_model->get_role($where);
-
 			$this->load->view('manage_user/add',$data);
 		}
 	}
@@ -136,7 +131,6 @@ class Manage_user extends CI_Controller {
 	public function edit($id = ''){
 		if ( isset($_POST['submit']) && $_POST['submit'] ) {
 			$data	=	array('message'=>0);
-			
 			$post	=	$this->input->post(NULL,TRUE);
 			$data['userid']	=	$post['userid'];
 
@@ -148,7 +142,6 @@ class Manage_user extends CI_Controller {
 				ob_end_flush();
 				exit;
 			}
-
 			$info	=	array();
 			if ( $post['password'] ) {
 				$passwordInfo	=	password($post['password']);
@@ -164,20 +157,16 @@ class Manage_user extends CI_Controller {
 			if ( $insertid ) {
 				//	管理员后台操作日志记录
 				manage_log('admin','manage_user','edit','/admin/manage_user/edit','修改管理员信息',array('userid'=>$post['userid']));
-				
 				$data['message']	=	'修改成功';
 				ob_start();
 				$this->load->view('manage_user/edit_action',$data);
 				ob_end_flush();
 				exit;
 			}
-
 			$data['message']	=	'修改失败,或者您未修改任何数据';
 			$this->load->view('manage_user/edit_action',$data);
-
 		}else{
 			$this->load->model('Role_model');
-			
 			//	查看角色组未被禁用的数据
 			$where	=	array('disabled'=>0);
 			$data['role']	=	$this->Role_model->get_role($where);
@@ -186,7 +175,6 @@ class Manage_user extends CI_Controller {
 				redirect(site_aurl('admin/manage_user'));
 				exit;
 			}
-
 			//	获取管理员信息
 			$data['userinfo']	=	$this->Admin_model->get_info_by_userid($id);
 			
@@ -211,7 +199,6 @@ class Manage_user extends CI_Controller {
 		if ( $userid ) {
 			//	查看信息
 			$userInfo	=	$this->Admin_model->get_info_by_userid($userid);
-
 			//	删除
 			$info	=	$this->Admin_model->deletes($userid);
 		}
@@ -221,11 +208,9 @@ class Manage_user extends CI_Controller {
 			manage_log('admin','manage_user','edit','/admin/manage_user/edit','删除管理员',array('userid'=>$userInfo['userid'],'username'=>$userInfo['username'],
 				'email'=>$userInfo['email']));
 		}
-
 		$result['message']	=	$info ? '删除成功' : 0;
 		$this->load->view('manage_user/delete_action',$result);
 	}
-
 
 	/**
 	* ajax 验证用户名是否已经存在
@@ -247,7 +232,6 @@ class Manage_user extends CI_Controller {
 		}
 		exit("false");
 	}
-	
 }
 
 /* End of file manage_user.php */

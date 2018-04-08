@@ -2,6 +2,7 @@
 class Menu extends CI_Controller{
     private $app_id = 'wxdce3470f9e79fc9a';
     private $app_secret = '825561daf1ab5b621674925d49ffd16f';
+
 	public function __construct(){
 		parent::__construct();
 	}

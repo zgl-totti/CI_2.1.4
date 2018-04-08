@@ -10,6 +10,7 @@
 class Main extends CI_Controller {
 	public $before_filter	=	'admin';
 	public $_userid;
+
 	/**
 	* 
 	* @author		wangyangyang
@@ -20,12 +21,10 @@ class Main extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
+
 		$this->load->model('Driving_model');
 		$this->load->model('Signup_model');
-	
 		$this->_userid	=	$this->session->userdata('userid');
-
-
 	}
 
 	/**
@@ -40,11 +39,8 @@ class Main extends CI_Controller {
 		$page	=	isset($page) ? intval($page) : 1;
 		$page	=	max(1,$page);
 		$pagesize	=	20;
-		
 		$info	=	$this->Signup_model->lists('',$page,$pagesize);
-
 		$pages	=	pages($info['total'],$pagesize,4,'/signup/main/index');
-		
 		$info['pages']	=	$pages;
 		templates('signup','index',$info);
 		exit;
@@ -105,8 +101,6 @@ class Main extends CI_Controller {
 			
 			templates('signup','edit',$data);
 		}
-
-		
 	}
 
 
@@ -139,7 +133,6 @@ class Main extends CI_Controller {
 				//	记录后台操作日志
 				manage_log('signup','main','add','/signup/main/add','添加项目',array('id'=>$insertid));
 			}
-
 			redirect(site_aurl('signup/main'));
 			exit;
 		}else{
@@ -148,7 +141,6 @@ class Main extends CI_Controller {
 			$data['shops'] = $main['info'];
 			templates('signup','add',$data);
 		}
-
 	}
 	/**
 	* 删除
@@ -160,20 +152,20 @@ class Main extends CI_Controller {
 	*/
 	public function deletes(){
 		if ( isset($_POST['submit']) && $_POST['submit'] ) {
-				$post	=	$this->input->post(NULL,TRUE);
-				$idArr	=	$post['id'] ? $post['id'] : '';
-				if ( !$idArr ) {
-					redirect(site_url('signup/main/index'));
-					exit;
-				}
-				
-				$deletes	=	$this->Signup_model->deletes($idArr);
-				if ( $deletes ) {
-					//	记录后台操作日志
-					manage_log('signup','main','deletes','/signup/main/deletes','删除项目',json_encode($idArr));
-				}
-				redirect(site_url('signup/main/index'));
-				exit;
+            $post	=	$this->input->post(NULL,TRUE);
+            $idArr	=	$post['id'] ? $post['id'] : '';
+            if ( !$idArr ) {
+                redirect(site_url('signup/main/index'));
+                exit;
+            }
+
+            $deletes	=	$this->Signup_model->deletes($idArr);
+            if ( $deletes ) {
+                //	记录后台操作日志
+                manage_log('signup','main','deletes','/signup/main/deletes','删除项目',json_encode($idArr));
+            }
+            redirect(site_url('signup/main/index'));
+            exit;
 		}
 	}
 
@@ -231,15 +223,12 @@ class Main extends CI_Controller {
 		}
 		
 		$update	=	$this->Signup_model->update($info,array('id'=>$id));
-
 		if ( $update ) {
 			//	记录后台操作日志
 			manage_log('signup','main','recommend','/signup/main/recommend','推荐项目',array('id'=>$id));
 			exit('1');
 		}
-
 		exit('0');
-		
 	}
 }
 

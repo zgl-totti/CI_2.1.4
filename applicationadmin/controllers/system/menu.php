@@ -23,9 +23,7 @@ class Menu extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('Menu_model');
-
 		$this->_userid	=	$this->session->userdata('userid');
-
 		//	菜单语言包
 		$this->lang->load('system_menu','zh_cn');
 		$this->load->helper('language');
@@ -66,8 +64,6 @@ class Menu extends CI_Controller {
 			$this->tree->init($array);
 			$data['categorys'] = $this->tree->get_tree(0, $str);
 		}
-		
-	
 		$this->load->view('menu/index',$data);
 	}
 	
@@ -85,14 +81,12 @@ class Menu extends CI_Controller {
 
 			//	更新排序
 			$listorder	=	$this->Menu_model->listorder($model_field_sort);
-			
 			if ( $listorder ) {
 				//	管理员后台操作日志记录
 				manage_log('system','menu','listorder','/system/menu/listorder','菜单管理排序');
 			}
 
 			$data['message']	=	$listorder  ? 1 : 0;
-			
 			$this->load->view('menu/listorder',$data);
 		}else{
 			redirect(site_aurl('system/menu'));
@@ -152,7 +146,7 @@ class Menu extends CI_Controller {
 			$menu	=	$this->Menu_model->lists();
 
 			if ( !$menu || !$menu['info'] ) {
-//				redirect(site_aurl('admin/main'));
+                //redirect(site_aurl('admin/main'));
 			}
 			
 			//	上级菜单下拉选择
@@ -165,8 +159,6 @@ class Menu extends CI_Controller {
 			$str  = "<option value='\$id' \$selected>\$spacer \$cname</option>";
 			$this->tree->init($array);
 			$data['select_categorys'] = $this->tree->get_tree(0, $str);
-			
-
 			$this->load->view('menu/add',$data);
 		}
 	}
@@ -186,7 +178,6 @@ class Menu extends CI_Controller {
 			$fileapppath=	str_replace('/',DIRECTORY_SEPARATOR,APPPATH);
 			$file = FCPATH.$fileapppath.'language'.DIRECTORY_SEPARATOR.'zh_cn'.
 				DIRECTORY_SEPARATOR.'system_menu_lang.php';
-
 			require $file;
 			$key		=	$post['name'];
 			//	判断是否修改了语言信息
@@ -232,7 +223,6 @@ class Menu extends CI_Controller {
 			$id		=	isset($urlArr['4']) ? intval($urlArr['4']) : '';
 
 			$this->load->library('tree');
-			
 			//	该字段信息
 			$info	=	$this->Menu_model->get($id);
 			if ( !$info ) {

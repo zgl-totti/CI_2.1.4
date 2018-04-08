@@ -13,8 +13,10 @@ class Changqing extends CI_Controller{
     //高级功能-》开发者模式-》获取
     private $app_id = 'wx669eb16a613703ae';                   
     private $app_secret = 'f0d01a8b6b07420b95001a0f55acb27a';
+
 	public function __construct(){
 		parent::__construct();
+
 		$this->load->model('Access_token_model');
 		$this->load->model('Ticket_model');
 	}
@@ -231,5 +233,4 @@ class Changqing extends CI_Controller{
         return array($http_code, $response);
         //抓取URL并把它传递给浏览器,收到的最后一个http代码
     }
- 
 }

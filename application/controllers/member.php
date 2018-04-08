@@ -10,11 +10,11 @@
 * @return
 */
 class Member extends CI_Controller {
-
 	//	用户id
 	public $userid;
 	private $app_id = 'wxdce3470f9e79fc9a';
     private $app_secret = '825561daf1ab5b621674925d49ffd16f';
+
 	/**
 	* 
 	* @author	wangyangyang
@@ -27,7 +27,6 @@ class Member extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('Member_model');
-		
 	}
 
 	/**
@@ -76,10 +75,8 @@ class Member extends CI_Controller {
 				templates('global','message',$data);
 				exit;
 			}
-
 		}else{
 			$member	=	$this->Member_model->useropenid($openid);
-			
 			if(!$member['usernumber']){
 				//	获取数据
 				$data	=	$this->Member_model->getone();
@@ -92,7 +89,6 @@ class Member extends CI_Controller {
 				$usernumber = $num.'001'.$random;
 
 				$info	=	$this->Member_model->checkuserbyco($usernumber);
-				
 				$return['usernumber'] = $usernumber;
 			}else{
 				$data['backurl']	=	site_url('member/archives');
@@ -103,26 +99,21 @@ class Member extends CI_Controller {
 			$return['seo_title'] = '会员申请';
 			$this->load->vars($return);
 			seo('会员申请');
-
 			templates('member','vipapply');
 		}
 	}
 
 	public function archives(){
-		header("Content-type: text/html; charset=utf-8"); 
-		
+		header("Content-type: text/html; charset=utf-8");
 		$access_token	=	$this->session->userdata('access_token');
 		$openid		    =	$this->session->userdata('openid');
 		if ( isset($_POST['dosubmit']) && $_POST['dosubmit'] ) {
 			$post	=	$this->input->post(NULL,TRUE);
-			
 			$id		=	$post['userid'] ? intval($post['userid']) : '';
-
 			if (!$id) {
 				redirect(site_url('member/main'));
 				exit;
 			}
-			
 			$info		=	array();
 			$info['username']	=	$post['username'];
 			$info['email']		=	$post['email'] ? $post['email'] : '';
@@ -145,7 +136,6 @@ class Member extends CI_Controller {
 			$info['renewal']		=	$post['renewal'] ? $post['renewal'] : '';
 			$info['update_time']	=	time();
 			$rows	=	$this->Member_model->updates($info,$openid);
-
 			if ( $rows ) {
 				$data['backurl']	=	site_url('member/archives');
 				$data['message']	=	'完善信息成功！';
@@ -157,7 +147,6 @@ class Member extends CI_Controller {
 				templates('global','message',$data);
 				exit;
 			}
-
 		}else{
 			$member	=	$this->Member_model->useropenid($openid);
 			if($member){
@@ -169,6 +158,5 @@ class Member extends CI_Controller {
 			templates('member','archives');
 		}
 	}
-
 }
 

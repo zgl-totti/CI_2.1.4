@@ -10,6 +10,7 @@
 class Main extends CI_Controller {
 	public $before_filter	=	'admin';
 	public $_userid;
+
 	/**
 	* 
 	* @author		wangyangyang
@@ -25,8 +26,6 @@ class Main extends CI_Controller {
 		$this->load->model('Shops_model');
 	
 		$this->_userid	=	$this->session->userdata('userid');
-
-
 	}
 
 	/**
@@ -43,12 +42,9 @@ class Main extends CI_Controller {
 		$pagesize	=	20;
 		
 		$info	=	$this->Commodity_model->lists('',$page,$pagesize);
-
 		$pages	=	pages($info['total'],$pagesize,4,'/commodity/main/index');
-		
 		$info['pages']	=	$pages;
-	/* echo "<pre/>";
-	 print_r($info);die;*/
+
 		templates('commodity','index',$info);
 		exit;
 	}
@@ -62,7 +58,6 @@ class Main extends CI_Controller {
 	* @return		
 	*/
 	public function edit( $sid = '' ){
-		//print_r($_POST);die;
 		if ( isset($_POST['submit']) && $_POST['submit'] ) {
 			$post	=	$this->input->post(NULL,TRUE);
 			$sid		=	$post['bookid'] ? intval($post['bookid']) : '';
@@ -88,11 +83,6 @@ class Main extends CI_Controller {
 			//$info['newdesc']		=	htmlspecialchars($post['newdesc']);
 			$info['updatetime']		=	time();
 
-			//echo '<pre>'; print_r($_FILES);die;
-
-
-
-
 			if ( isset($_FILES) && $_FILES) {
 				//	详情图片修改处理
 				$this->load->library('attachmentclass');
@@ -101,60 +91,37 @@ class Main extends CI_Controller {
 				/*上传多张图片*/
 				foreach($_FILES  as $k=> $v) {
 					if (!empty($v['name'])) {
-
 						$thumb[$k] = $this->attachmentclass->upload($k);
 					}
-
-
 				}
-//echo '<pre>';print_r($thumb);die;
-				//$info['thumb'][]	=	$thumb ? $thumb['filepath'] : '';
 				if($thumb){
 					foreach($thumb as $k=>$v){
-
-
 						$info[$k]=$v['filepath'];
 					}
 				}
-
 			}
 
-
-
-
-//echo '<pre>';print_r($info);die;
-
 			$rows	=	$this->Commodity_model->update($info,array('id'=>$sid));
-
 			if ( $rows>0 ) {
 				//	记录后台操作日志
 				manage_log('commodity','main','edit','/commodity/main/edit','修改项目信息',array('id'=>$sid));
-
 			}
-
 			redirect(site_aurl('commodity/main'));
 			exit;
 		}else{
 			$sid		=	$sid ? intval($sid) : '';
-			
 			//	如果获取不到id值，直接跳转到所有列表页面
 			if ( !$sid ) {
 				redirect(site_aurl('commodity/main'));
 				exit;
 			}
 			$where	=	array('id'=>$sid);
-			
-			$data['info']	=	$this->Commodity_model->getone($where);	
-
+			$data['info']	=	$this->Commodity_model->getone($where);
 			//$main	=	$this->Commodity_group_model->lists();
-
-		///	$data['shops'] = $main['info'];
+            //	$data['shops'] = $main['info'];
 			//	获取用户组详细信息
-			
 			templates('commodity','edit',$data);
 		}
-
-		
 	}
 
 
@@ -167,7 +134,6 @@ class Main extends CI_Controller {
 	* @return		
 	*/
 	public function add(){
-
 		if ( isset($_POST['submit']) && $_POST['submit'] ) {
 			$post	=	$this->input->post(NULL,TRUE);
 			
@@ -183,14 +149,14 @@ class Main extends CI_Controller {
 			$info['stock']	=	$post['stock'];
 			//商铺关联ID
 			$info['gid']	=	$post['gid'] ? intval($post['gid']) : 0;
-			// print_r($info['gid']);die;
+
 			//	详细介绍
 			$info['newdesc']		=	htmlspecialchars($_POST['desc']);
 			//$info['newdesc']		=	htmlspecialchars($post['newdesc']);
 			$info['add_time']	=	time();
 			$info['updatetime']	=	time();
 			$info['userid']		=	$this->_userid;
-			//print_r($_FILES);die;
+
 			if ( isset($_FILES) && $_FILES) {
 				//	详情图片修改处理
 				$this->load->library('attachmentclass');
@@ -199,50 +165,28 @@ class Main extends CI_Controller {
 				/*上传多张图片*/
 				foreach($_FILES  as $k=> $v) {
 					if (!empty($v['name'])) {
-
 						$thumb[$k] = $this->attachmentclass->upload($k);
 					}
-
-
 				}
-//echo '<pre>';print_r($thumb);die;
-				//$info['thumb'][]	=	$thumb ? $thumb['filepath'] : '';
 				if($thumb){
 					foreach($thumb as $k=>$v){
-
-
 						$info[$k]=$v['filepath'];
 					}
 				}
-
 			}
-
-
-
-			//echo '<pre>'; print_r($info);die;
 			$insertid	=	$this->Commodity_model->insert($info);
-
-
-
 			if ( $insertid ) {
 				//	记录后台操作日志
 				manage_log('commodity','main','add','/commodity/main/add','添加项目',array('id'=>$insertid));
-
 				redirect(site_aurl('commodity/main'));
 			}
-
-
 			exit;
 		}else{
-
 			$data['dianmian']	=	$this->Shops_model->lists();
 			$main	=	$this->Commodity_group_model->lists();
-
-
 			$data['shops'] = $main['info'];
 			templates('commodity','add',$data);
 		}
-
 	}
 	/**
 	* 删除
@@ -254,20 +198,20 @@ class Main extends CI_Controller {
 	*/
 	public function deletes(){
 		if ( isset($_POST['submit']) && $_POST['submit'] ) {
-				$post	=	$this->input->post(NULL,TRUE);
-				$idArr	=	$post['id'] ? $post['id'] : '';
-				if ( !$idArr ) {
-					redirect(site_url('commodity/main/index'));
-					exit;
-				}
-				
-				$deletes	=	$this->Commodity_model->deletes($idArr);
-				if ( $deletes ) {
-					//	记录后台操作日志
-					manage_log('commodity','main','deletes','/commodity/main/deletes','删除项目',json_encode($idArr));
-				}
-				redirect(site_url('commodity/main/index'));
-				exit;
+            $post	=	$this->input->post(NULL,TRUE);
+            $idArr	=	$post['id'] ? $post['id'] : '';
+            if ( !$idArr ) {
+                redirect(site_url('commodity/main/index'));
+                exit;
+            }
+
+            $deletes	=	$this->Commodity_model->deletes($idArr);
+            if ( $deletes ) {
+                //	记录后台操作日志
+                manage_log('commodity','main','deletes','/commodity/main/deletes','删除项目',json_encode($idArr));
+            }
+            redirect(site_url('commodity/main/index'));
+            exit;
 		}
 	}
 
@@ -325,15 +269,12 @@ class Main extends CI_Controller {
 		}
 		
 		$update	=	$this->Commodity_model->update($info,array('id'=>$id));
-
 		if ( $update ) {
 			//	记录后台操作日志
 			manage_log('commodity','main','recommend','/commodity/main/recommend','推荐项目',array('id'=>$id));
 			exit('1');
 		}
-
 		exit('0');
-		
 	}
 }
 

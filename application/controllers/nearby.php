@@ -12,7 +12,6 @@ header('Content-type:text/html;charset=utf-8');
  */
 class Nearby extends CI_Controller
 {
-
     /**
      *
      * @author    wangyangyang
@@ -35,7 +34,6 @@ class Nearby extends CI_Controller
         $this->load->model('Card_model');
         $this->load->model('Wechat_model');
         $this->load->model('Business_model');
-
     }
 
 
@@ -49,8 +47,6 @@ class Nearby extends CI_Controller
      */
     public function index($sid = '')
     {
-
-
         //	条件
         $where = array();
         //$service	=	$this->Shops_service_model->lists();
@@ -61,8 +57,6 @@ class Nearby extends CI_Controller
 
         //	获取数据
         $shops = $this->Shops_model->lists($where, $page, $pagesize, 'updatetime DESC');
-
-
         foreach ($shops['info'] as $key => $value) {
             if ($value && $value['service']) {
                 $shops['info'][$key]['service'] = explode(',', $value['service']);
@@ -86,24 +80,18 @@ class Nearby extends CI_Controller
         }
         $data['pages'] = $pages ? $pages : '';
         $data['total'] = $total ? $total : 0;
-
         $data['abb'] = $this->Shops_group_model->lists123();
 
         $this->load->vars($data);
-
         templates('wxmain', 'dingdan', $data);
     }
 
 
     public function dianpu($id)
     {
-
-
         $this->load->model('Shops_model');
         $where['gid'] = $this->uri->segment(3);
-
         $data['dpsp'] = $this->Shops_model->lb($where);//echo "string";
-
         $data['ay'] = $this->Shops_model->newsinfo($id);
 
         /*获取店铺收藏转态*/
@@ -113,11 +101,8 @@ class Nearby extends CI_Controller
         ));
 
         $data['status'] = $res;
-
-//店面服务项
-
+        //店面服务项
         $shops_service = $this->Shops_service_model->lists();
-
         $data['shops_service'] = $shops_service['info'];
         // echo '<pre>'; print_r($data['shops_service']);die;
         templates('wxmain', 'nearbyshow', $data);
@@ -125,11 +110,9 @@ class Nearby extends CI_Controller
 
     public function nearbyshow($sid = '')
     {
-
         seo('店面详情');
         //	条件
         $sid = $sid ? intval($sid) : '';
-
         $where = array('id' => $sid);
         $data = $this->Shops_model->get_one($where);
         //print_r($data);die;
@@ -146,83 +129,58 @@ class Nearby extends CI_Controller
         // 	}
         // }
         // $data['seo_title'] = '店面详情';
-
         $this->load->vars($data);
         templates('wxmain', 'dingdan');
     }
 
     public function nearbyshow1()
     {
-
         templates('wxmain', 'nearbyshow');
-
     }
 
     public function dingdans($number = '')
     {
-
-
         if ($number) {
             //修改订单状态    $_SESSION['data']['ordernum'];
             $data['update_time'] = time();//已付款
             $data['status_user'] = 1;//已付款
             $where['ordernum'] = $number;
             $row = $this->Order_model->update($data, $where);
+
             /**********获取商户电话*************/
-
-
             $res = $this->Order_model->get_shop_phone($number);
 
-//echo '<pre>';print_r($res);die;
-
             Phone_Msg($res['sphone'], '手机号为' . $res['phone'] . '用户购买了你的' . $res['gname'] . '商品，请及时处理。');
-
 
             if ($row > 0) {
                 echo '<script>alert("请尽快来取货，感谢您的购买")</script>';
             } else {
                 echo '<script>alert("系统错误")</script>';
             }
-
         }
-
         $data['noinfo'] = $this->Order_model->lists(array(
             'openid' => $_SESSION['openid'],),'','',array('1','3'));
 
-
-
-
-
-
-
         //$data6s['sp']   =   $this->Card_model->getshops($where);
+
         $data['oinfo'] = $this->Order_model->lists(array(
             'openid' => $_SESSION['openid'],
             'status_user' => 0   //未付款60323273
 
         ));
-
-
-       // echo '<pre>';print_r($data['noinfo']);die;
-
         templates('wxmain', 'grzxdingdan', $data);
     }
 
-
     public function scsj()
     {
-
         $this->load->model('Shops_service_model');
         $datas['sinfo'] = $this->Shops_service_model->getshoucang($_SESSION['openid']);
-        // echo '<pre>';print_r($datas['sinfo']);
         templates('wxmain', 'shoucang', $datas);
     }
 
 
     public function collect()
     {
-
-
         /*if(!$_SESSION['openid']){
             $date['msg'] = '操作失败请重新登陆';
             $date['status'] = -1;
@@ -235,18 +193,11 @@ class Nearby extends CI_Controller
         $res = $this->Shops_service_model->getoneshoucang($data);
         if ($res) {
             $this->Shops_service_model->delshoucang($data);
-
-
             $date['msg'] = '取消成功';
             $date['status'] = -2;
             exit(json_encode($date));
         }
-
-
-//print_r($_SESSION);die;
-
         $insert = $this->Shops_service_model->addshoucang($data);
-
         if ($insert) {
             $date['msg'] = '收藏店铺成功';
             $date['status'] = 1;
@@ -304,9 +255,7 @@ class Nearby extends CI_Controller
         $info = $this->Wechat_model->get_ones($_SESSION['openid'], 'shop_id');
         $data['exchange'] = $this->Order_model->lists(array('shopid' => $info[0]['shop_id'], 'status_user' => 3
         ), $page = 1);
-        //print_r($info);
         templates('wxmain', 'dingdan6', $data);
-
     }
 
     public function duihuan()
@@ -367,56 +316,40 @@ class Nearby extends CI_Controller
             redirect('weixin/wechat/userinfo');
         }
     }
+
     //兑换失败
     public function converterror(){
         $data['status']=2;
         templates('wxmain', 'changeState',$data);
     }*/
 
-
     public function jtdianming($id)
     {
-
         $data['sh'] = $this->Shops_model->getalls($_SESSION['pid']);
         foreach ($data['sh'] as $v) {
             $s_ids[] = $v['id'];
         }
         $data['abb'] = $this->Shops_group_model->lists111($id, $s_ids);
-
         templates('wxmain', 'xiuxianyangshengxx', $data);
     }
 
     public function shanji($pid)
     {
-        // echo $pid;die;
-
         $_SESSION['pid'] = $pid;
-
         $data['sh'] = $this->Shops_model->getalls($pid);
-        // echo '<pre>'; print_r($data['sh']);die;
         if (!empty($data['sh'])) {
             foreach ($data['sh'] as $v) {
                 $s_ids[] = $v['id'];
             }
         }
 
-        /*echo "<pre/>";
-         print_r($s_ids);die;*/
-
         // $a=array("美食订餐","酒店住宿","休闲养生","生活服务","旅游户外","教育培训","家电装饰","农资供应");
         // $data['ccc']    =   $a;
 
-// print_r($data['ccc']);die;
-//var_dump($s_ids);die;
-
         $data['abb'] = $this->Shops_group_model->lists111(52, $s_ids);
         $data['title'] = $this->Shops_group_model->get($pid);
-
-// print_r($data['title']);die;
-//print_r($data['abb']);die;
         templates('wxmain', 'xiuxianyangshengxx', $data);
     }
-
 
     public function w_pay($orderid)
     {
@@ -430,10 +363,7 @@ class Nearby extends CI_Controller
         if (!$_SESSION['openid']) {
             header('location:http://weixin.hngynsyh.com/nearby/dingdans');
         }
-        
-        //echo '<pre>';print_r($_SESSION);die;
         header('location:http://weixin.hngynsyh.com/wxpay/example/jsapi.php');
-        
     }
 
     public function del_order($orderid)
@@ -442,13 +372,10 @@ class Nearby extends CI_Controller
         $where['id'] = $orderid;
         $data['status_user'] = 2;    //取消订单
         $this->Order_model->update($data, $where);
-
         redirect(site_url('nearby/dingdans'));
-
-
     }
-    public function apply(){
 
+    public function apply(){
         if($_POST){
             $info['name']=$_POST['name'];
             $info['openid']=$_SESSION['openid'];
@@ -462,30 +389,18 @@ class Nearby extends CI_Controller
                 $result['info']=$info;
                 exit(json_encode($result));
 
-       /*
-              $url=  $_SESSION['before_url'] ;
-
-
-echo "<script>setTimeout(function(){window.location.href='<?php echo $url ;?>';
- },4000)</script>";
-
+                /*$url=  $_SESSION['before_url'] ;
+                echo "<script>setTimeout(function(){window.location.href='<?php echo $url ;?>';
+                 },4000)</script>";
                 redirect($_SESSION['before_url']);*/
-
-
 
             }else{
                 $result['status']=-1;
                 exit(json_encode($result));
             }
         }else{
-
             $res=$this->Business_model->get_one($_SESSION['openid']);
-
-
         }
-
-
-
         templates('wxmain', 'apply', $res);
     }
 }

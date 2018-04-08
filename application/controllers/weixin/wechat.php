@@ -11,8 +11,10 @@ class Wechat extends CI_Controller{
     //高级功能-》开发者模式-》获取
     private $app_id = 'wx669eb16a613703ae';
     private $app_secret = 'f0d01a8b6b07420b95001a0f55acb27a';
+
 	public function __construct(){
 		parent::__construct();
+
 		$this->load->model('Shops_model');
 		$this->load->model('Shops_group_model');
 		$this->load->model('Wechat_model');

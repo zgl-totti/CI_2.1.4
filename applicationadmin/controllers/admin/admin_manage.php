@@ -23,7 +23,6 @@ class Admin_manage extends CI_Controller {
 		parent::__construct();
 		
 		$this->_userid	=	$this->session->userdata('userid');
-
 		$this->load->model('Admin_model');
 	}
 
@@ -38,7 +37,6 @@ class Admin_manage extends CI_Controller {
 	public function index($message = '' ){
 		//	获取管理员信息
 		$userInfo	=	$this->Admin_model->get_info_by_userid($this->_userid);
-
 		$urlArr	=	get_segment_arr();
 		
 		if ( isset($message) && $message) {
@@ -106,7 +104,6 @@ class Admin_manage extends CI_Controller {
 			if ( $update ) {
 				//	管理员后台操作日志记录
 				manage_log('admin','admin_manage','editpwd','/admin/admin_manage/editpwd','修改管理员密码');
-
 				redirect(site_aurl('admin/admin_manage/index/3'));
 				exit;
 			}
@@ -139,21 +136,17 @@ class Admin_manage extends CI_Controller {
 			$info['email']		=	$this->input->post('email',TRUE);
 			
 			$update	=	$this->Admin_model->update_info($this->_userid,$info);
-			
 			if ( $update ) {
 				//	管理员后台操作日志记录
 				manage_log('admin','admin_manage','editinfo','/admin/admin_manage/editinfo','修改管理员信息');
-
 				redirect(site_aurl('admin/admin_manage/editinfo/2'));
 				exit;
 			}
 			redirect(site_aurl('admin/admin_manage/editinfo/1'));
 			exit;
-			
 		} else {
 			//	获取管理员信息
 			$userInfo	=	$this->Admin_model->get_info_by_userid($this->_userid);
-
 			$urlArr	=	get_segment_arr();
 			if ( isset($urlArr[4]) && $urlArr[4]) {
 				$data	=	array();
@@ -169,14 +162,11 @@ class Admin_manage extends CI_Controller {
 				}
 				$this->load->vars($data);
 			}
-
 			//	加载变量
 			$this->load->vars($userInfo);
 			$this->load->view('admin_manage/editinfo');
 		}
 	}
-	
-	
 }
 
 /* End of file admin_manage.php */

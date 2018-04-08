@@ -9,6 +9,7 @@
 */
 class Attachment extends CI_Controller {
 	public $_userid;
+
 	/**
 	* 
 	* @author		wangyangyang
@@ -19,7 +20,7 @@ class Attachment extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
-		
+
 		$this->_userid	=	$this->session->userdata('userid');
 	}
 
@@ -33,7 +34,6 @@ class Attachment extends CI_Controller {
 	*/
 	public function index(){
 		$this->config->set_item('enable_query_strings',TRUE);
-
 		$this->load->library('attachmentclass');
 		
 		$this->attachmentclass->set_userid($this->_userid);
@@ -48,6 +48,4 @@ class Attachment extends CI_Controller {
 			exit($str);
 		}
 	}
-	
-	
 }

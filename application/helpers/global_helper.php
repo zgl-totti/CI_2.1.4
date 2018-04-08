@@ -539,7 +539,8 @@ function getRandom($param=8){
 function makeorder(){
 	$yCode = array('a', 'B', 'w', 'D', 'e', 'f', 'g', 'h', 'i', 'j','k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't');
 	$orderSn = $yCode[intval(date('Y')) - 2011] . strtoupper(dechex(date('m'))) . date('d') . substr(time(), -5) . substr(microtime(), 2, 5) . sprintf('%02d', rand(0, 99));
-	return $orderSn;}
+	return $orderSn;
+}
 
 function showImage($url, $width = '', $height = '')
 {

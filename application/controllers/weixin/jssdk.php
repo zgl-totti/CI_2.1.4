@@ -10,6 +10,7 @@ class JSSDK  extends CI_Controller {
 
     public function __construct($appId, $appSecret) {
         parent::__construct();
+
         $this->appId = $appId;
         $this->appSecret = $appSecret;
         if(!session('token')){

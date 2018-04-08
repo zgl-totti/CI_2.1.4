@@ -101,6 +101,5 @@ class Main extends CI_Controller{
 	}
 }
 
-
 /* End of file weixin.php */
 /* Location: ./application/controllers/weixin.php */

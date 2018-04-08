@@ -12,6 +12,7 @@
 class Record extends CI_Controller {
 	//	用户id
 	public $userid;
+
 	/**
 	* 
 	* @author		wangteng
@@ -22,6 +23,7 @@ class Record extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
+
 		$userid	=	$this->input->cookie('user',true);
         //$this->userid	=	$userid ? aesDecode($userid) : '1';
 		$this->load->model('Weixininfo_model');
@@ -113,6 +115,7 @@ class Record extends CI_Controller {
 		$this->load->vars($data);
 		templates('weixin/game','lists',$data);
 	}
+
 	/**
 	 * 添加游戏
 	 * @author		wangteng
@@ -142,6 +145,7 @@ class Record extends CI_Controller {
 		}
         templates('weixin/game','add_game');
 	}
+
 	/**
 	 * 中奖记录
 	 * @author		wangteng

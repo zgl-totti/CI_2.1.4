@@ -10,6 +10,7 @@
 class Main extends CI_Controller {
 	public $before_filter	=	'admin';
 	public $_userid;
+
 	/**
 	* 
 	* @author		wangyangyang
@@ -20,6 +21,7 @@ class Main extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
+
 		$this->_userid	=	$this->session->userdata('userid');
 		$this->load->model('Yuyue_model');
 		$this->load->model('Member_group_model');
@@ -27,10 +29,7 @@ class Main extends CI_Controller {
 		$this->load->model('Order_model');
 		$this->load->model('Admin_model');
 		$this->load->model('Card_model');
-		
-		
 		$this->_userid	=	$this->session->userdata('userid');
-
 	}
 
 	/**
@@ -49,17 +48,13 @@ class Main extends CI_Controller {
 		if($userinfo['userid'] == 2){
 			$where = "DATE_FORMAT(FROM_UNIXTIME(add_time),'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')";
 		}
-		
-    
-    
 		$data	=	$this->Yuyue_model->lists($where,$page,$pagesize);
-//print_r($data);die;
 		// foreach ($data['info'] as $key => $value) {
 		// 	$info	=	$this->Card_model->getbyid($value['card_id']);
 		// 	$data['info'][$key]['usernumber'] = $info['0']['usernumber'];
 		// }
 		$data['pages']	=	pages($data['total'],$pagesize,4,'/yuyue/main/index');
-		
+
 		//	查询用户组信息
 		// $this->load->model('Member_group_model');
 		// $ginfo			=	$this->Member_group_model->lists('',1,1000);
@@ -90,34 +85,25 @@ class Main extends CI_Controller {
 			$info	=	array();
 			$info['realname']	=	$post['realname'];
 			$info['nickname']	=	$post['nickname'];
-			
 			$info['telephone']		=	$post['telephone'] ? $post['telephone'] : '';
-			
 			$info['price']		=	$post['price'] ? $post['price'] : '';
-			
 
 			$update	=	$this->Yuyue_model->updates($info,$id);
-
 			if ( $update ) {
 				//	记录后台操作日志
 				manage_log('yuyue','main','edit','/yuyue/main/edit','修改用户基本信息',array('userid'=>$id));
 			}
-
 			redirect(site_aurl('yuyue/main'));
 			exit;
 		}else{
 			//	获取用户组详细信息
 			$id		=	$id ? intval($id) : '';
-			
 			//	如果获取不到id值，直接跳转到所有列表页面
 			if ( !$id ) {
 				redirect(site_aurl('yuyue/main'));
 				exit;
 			}
-
 			$where	=	array('userid'=>$id);
-			
-			
 			$data['info']	=	$this->Yuyue_model->get($where);
 			
 			//	查询用户组信息
@@ -129,7 +115,6 @@ class Main extends CI_Controller {
 			// $data['admin']	=	$ainfo && $ainfo['info'] ? $ainfo['info'] : array();
 
 			$data['userid'] =   $this->_userid;
-
 			$this->load->view('yuyue/edit',$data);
 		}
 	}
@@ -145,14 +130,11 @@ class Main extends CI_Controller {
 	public function add(){
 		if ( isset($_POST['submit']) && $_POST['submit'] ) {
 			$post	=	$this->input->post(NULL,TRUE);
-			
-			
+
 			$info	=	array();
 			$info['realname']	=	$post['realname'];
 			$info['nickname']	=	$post['nickname'];
-			
 			$info['telephone']		=	$post['telephone'] ? $post['telephone'] : '';
-			
 			$info['price']		=	$post['price'] ? $post['price'] : '';
 			$info['add_time']	=	time();
 
@@ -162,12 +144,10 @@ class Main extends CI_Controller {
 				//	记录后台操作日志
 				manage_log('yuyue','main','add','/yuyue/main/add','添加用户',array('userid'=>$userid));
 			}
-
 			redirect(site_aurl('yuyue/main'));
 			exit;
 		}else{
 			$data	=	array();
-			
 			//	查询用户组信息
 			// $this->load->model('Member_group_model');
 			// $ginfo			=	$this->Member_group_model->lists('',1,1000);
@@ -178,7 +158,6 @@ class Main extends CI_Controller {
 			// $data['admin']	=	$ainfo && $ainfo['info'] ? $ainfo['info'] : array();
 			
 			$data['userid'] =   $this->_userid;
-
 			$this->load->view('yuyue/add',$data);
 		}
 	}
@@ -284,12 +263,10 @@ class Main extends CI_Controller {
 	* @return		
 	*/
 	public function order(){
-
 		if ( isset($_POST['submit']) && $_POST['submit'] ){
 			$post	=	$this->input->post(NULL,TRUE);
 			$idArr	=	$post['userid'] ? $post['userid'] : '';
 			$service=	isset($post['service']) && $post['service'] ? $post['service'] : '';
-
 			if ( !$idArr && !$service ) {
 				redirect(site_url('member/main'));
 				exit;
@@ -302,8 +279,7 @@ class Main extends CI_Controller {
 					exit;
 				}
 			}
-			
-			
+
 			if ( $service ) {
 				$services	=	implode(",", $service);
 			}else{
@@ -326,7 +302,6 @@ class Main extends CI_Controller {
 				//	记录后台操作日志
 				manage_log('member','main','order','/member/main/order','生成订单',json_encode($idArr));
 			}
-			
 			$data['message']	=	$orderid  ? 1 : 0;
 			$this->load->view('member/order',$data);
 		}
@@ -462,10 +437,7 @@ class Main extends CI_Controller {
 				$ginfo[$val['id']]	=	$val;
 			}
 		}
-
 		Return $ginfo;
 	}
-	
-	
 }
 

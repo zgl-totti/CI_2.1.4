@@ -10,6 +10,7 @@ class Ggl extends CI_Controller{
     //高级功能-》开发者模式-》获取
     private $app_id = 'wx3f340e4d81d90617';
     private $app_secret = 'a9d1f6c3920c74caccf94519f8552bb3';
+
 	public function __construct(){
 		parent::__construct();
 	}

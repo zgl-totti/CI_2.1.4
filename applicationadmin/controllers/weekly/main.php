@@ -10,6 +10,7 @@
 class Main extends CI_Controller {
 	public $before_filter	=	'admin';
 	public $_userid;
+
 	/**
 	* 
 	* @author		wangyangyang
@@ -20,11 +21,9 @@ class Main extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
+
 		$this->load->model('Weekly_model');
-	
 		$this->_userid	=	$this->session->userdata('userid');
-
-
 	}
 
 	/**
@@ -39,11 +38,8 @@ class Main extends CI_Controller {
 		$page	=	isset($page) ? intval($page) : 1;
 		$page	=	max(1,$page);
 		$pagesize	=	20;
-		
 		$info	=	$this->Weekly_model->lists('',$page,$pagesize);
-
 		$pages	=	pages($info['total'],$pagesize,4,'/weekly/main/index');
-		
 		$info['pages']	=	$pages;
 		templates('weekly','index',$info);
 		exit;
@@ -61,7 +57,6 @@ class Main extends CI_Controller {
 		if ( isset($_POST['submit']) && $_POST['submit'] ) {
 			$post	=	$this->input->post(NULL,TRUE);
 			$sid		=	$post['bookid'] ? intval($post['bookid']) : '';
-
 			if (!$sid) {
 				redirect(site_url('weekly/main'));
 				exit;
@@ -83,7 +78,6 @@ class Main extends CI_Controller {
 			}
 
 			$rows	=	$this->Weekly_model->update($info,array('id'=>$sid));
-
 			if ( $rows ) {
 				//	记录后台操作日志
 				manage_log('weekly','main','edit','/weekly/main/edit','修改项目信息',array('id'=>$sid));
@@ -93,21 +87,16 @@ class Main extends CI_Controller {
 			exit;
 		}else{
 			$sid		=	$sid ? intval($sid) : '';
-			
 			//	如果获取不到id值，直接跳转到所有列表页面
 			if ( !$sid ) {
 				redirect(site_aurl('weekly/main'));
 				exit;
 			}
 			$where	=	array('id'=>$sid);
-			
 			$data['info']	=	$this->Weekly_model->getone($where);	
 			//	获取用户组详细信息
-			
 			templates('weekly','edit',$data);
 		}
-
-		
 	}
 
 
@@ -140,22 +129,19 @@ class Main extends CI_Controller {
 				$thumb	=	$this->attachmentclass->upload('thumb');
 				$info['thumb']	=	$thumb ? $thumb['filepath'] : '';
 			}
-			
 			$insertid	=	$this->Weekly_model->insert($info);
-
 			if ( $insertid ) {
 				//	记录后台操作日志
 				manage_log('weekly','main','add','/weekly/main/add','添加项目',array('id'=>$insertid));
 			}
-
 			redirect(site_aurl('weekly/main'));
 			exit;
 		}else{
-
 			templates('weekly','add');
 		}
 
 	}
+
 	/**
 	* 删除
 	* @author		wangyangyang
@@ -166,20 +152,20 @@ class Main extends CI_Controller {
 	*/
 	public function deletes(){
 		if ( isset($_POST['submit']) && $_POST['submit'] ) {
-				$post	=	$this->input->post(NULL,TRUE);
-				$idArr	=	$post['id'] ? $post['id'] : '';
-				if ( !$idArr ) {
-					redirect(site_url('weekly/main/index'));
-					exit;
-				}
-				
-				$deletes	=	$this->Weekly_model->deletes($idArr);
-				if ( $deletes ) {
-					//	记录后台操作日志
-					manage_log('weekly','main','deletes','/weekly/main/deletes','删除项目',json_encode($idArr));
-				}
-				redirect(site_url('weekly/main/index'));
-				exit;
+            $post	=	$this->input->post(NULL,TRUE);
+            $idArr	=	$post['id'] ? $post['id'] : '';
+            if ( !$idArr ) {
+                redirect(site_url('weekly/main/index'));
+                exit;
+            }
+
+            $deletes	=	$this->Weekly_model->deletes($idArr);
+            if ( $deletes ) {
+                //	记录后台操作日志
+                manage_log('weekly','main','deletes','/weekly/main/deletes','删除项目',json_encode($idArr));
+            }
+            redirect(site_url('weekly/main/index'));
+            exit;
 		}
 	}
 
@@ -237,15 +223,12 @@ class Main extends CI_Controller {
 		}
 		
 		$update	=	$this->Weekly_model->update($info,array('id'=>$id));
-
 		if ( $update ) {
 			//	记录后台操作日志
 			manage_log('weekly','main','recommend','/weekly/main/recommend','推荐项目',array('id'=>$id));
 			exit('1');
 		}
-
 		exit('0');
-		
 	}
 }
 

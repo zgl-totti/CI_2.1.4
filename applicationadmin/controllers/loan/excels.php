@@ -10,6 +10,7 @@ header("Content-Type:text/html;charset=utf-8");
 class Excels extends CI_Controller {
 	public $before_filter	=	'admin';
 	public $_userid;
+
 	/**
 	* 
 	* @author		wangyangyang
@@ -21,12 +22,11 @@ class Excels extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 
-//echo   44;die;
 		ini_set('memory_limit', '128M');
 		set_time_limit(0);
 		$this->load->model('Loan_model');
-
 	}
+
 /*****************************导出************************************/
 	public function index(){
 
@@ -34,32 +34,22 @@ class Excels extends CI_Controller {
 		$keywords	=	$this->input->get('q',TRUE);
 
 		//获取数据
-
 		$data		=	$this->Loan_model->excels_search($where='',$keywords);
-
 		$data['total']	=	$data['total'] ? $data['total'] : 0;
 		$this->config->set_item('enable_query_strings',FALSE);
-
-
 		$user = $data['uid'];
-	//echo '<pre>';	print_r($user);die;
-
 		$this->export($user);
 	}
 
 
 
 	/**********************************************/
-	public function export($ids = '')
-	{
-
-		//print_r($ids) ;die;
+	public function export($ids = ''){
 		//引入PHPExcel库文件（路径根据自己情况）
 		include './statics/phpexcel/Classes/PHPExcel.php';
 		//创建对象
 		$this->excel = new PHPExcel();
 		$this->one($ids);
-
 
 		//echo '<pre>';print_r($this->one($ids));die;
 
@@ -84,48 +74,28 @@ class Excels extends CI_Controller {
 	 */
 	public function one($ids){
 		$one  =	$this->Loan_model->one($ids);
-//echo '<pre>';print_r($one);die;
 		//添加时间
-		for ($b=0;$b<count($one);$b++)
-		{
-
-
-			if($one[$b]['idcard'] != 0)
-			{
+		for ($b=0;$b<count($one);$b++) {
+			if($one[$b]['idcard'] != 0) {
 				$one[$b]['idcard']=     " ".$one[$b]['idcard']." " ;
 			}
 
-
-
-			if($one[$b]['addtime'] != 0)
-			{
+			if($one[$b]['addtime'] != 0) {
 				$one[$b]['addtime']=date('Y-m-d H:i:s',$one[$b]['addtime']);
-			}
-
-			else if($one[$b]['addtime'] == 0)
-			{
+			} else if($one[$b]['addtime'] == 0) {
 				$one[$b]['addtime'] = '-';
 			}
 
-			if($one[$b]['status'] == 0)
-			{
+			if($one[$b]['status'] == 0) {
 				$one[$b]['status']='未处理';
 			}elseif($one[$b]['status'] == 1){
 				$one[$b]['status']='已处理';
 			}
 
-
-
-
-
-			/*if(isset($one[$b]['idcard']) && $one[$b]['idcard'] != '')
-			{
+			/*if(isset($one[$b]['idcard']) && $one[$b]['idcard'] != ''){
 				$one[$b]['idcard'] = intval($one[$b]['idcard']);
 			}*/
-
-
 		}
-
 
 		//表格宽度
 		$this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(15);
@@ -154,6 +124,7 @@ class Excels extends CI_Controller {
 		$this->excel->getActiveSheet()->getColumnDimension('X')->setWidth(40);
 		$this->excel->getActiveSheet()->getColumnDimension('Y')->setWidth(40);
 		$this->excel->getActiveSheet()->getColumnDimension('Z')->setWidth(40);
+
 		//文字左右居中
 		$this->excel->getActiveSheet()->getStyle('A')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		$this->excel->getActiveSheet()->getStyle('B')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -186,33 +157,23 @@ class Excels extends CI_Controller {
 		$this->excel->getActiveSheet()->setTitle('贷款信息');
 		//$letter = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 		$letter = array('A','B','C','D','E','F','G','H','I');
-		//表头数组
 
+		//表头数组
 		$tableheader = array('编号','电话','姓名','身份证号','金额','用途','地区','申请时间','状态');
 
 		//填充表头信息
-
 		for($i = 0;$i < count($tableheader);$i++) {
 			$this->excel->getActiveSheet()->setCellValue("$letter[$i]1","$tableheader[$i]");
 		}
 
 		//填充表格信息
-
 		for ($i = 2;$i <= count($one) + 1;$i++) {
-
 			$j = 0;
-
 			foreach ($one[$i - 2] as $key=>$value) {
 				$this->excel->getActiveSheet()->setCellValue("$letter[$j]$i","$value");
-
 				$j++;
-
 			}
-
 		}
-
 	}
-
-
 }
 

@@ -29,7 +29,6 @@ class Main extends CI_Controller
         $this->load->model('Shops_service_model');
         $this->load->model('Admin_model');
         $this->_userid = $this->session->userdata('userid');
-
     }
 
     /**
@@ -42,8 +41,6 @@ class Main extends CI_Controller
      */
     public function index($page = '')
     {
-
-
         $oinfo = $this->Order_model->lists('', $page, $pagesize = 10);
         $pages = pages($oinfo['total'], $pagesize, 4, '/order/main/index/');
         $oinfo['pages'] = $pages;
@@ -73,7 +70,6 @@ class Main extends CI_Controller
             }
 
             $deletes = $this->Order_model->deletes($idArr);
-
             if ($deletes) {
                 //	记录后台操作日志
                 manage_log('order', 'main', 'deletes', '/order/main/deletes', '删除信息', json_encode($idArr));
@@ -97,7 +93,6 @@ class Main extends CI_Controller
         //	修改url可读取方式
         $this->config->set_item('enable_query_strings', TRUE);
 
-
         if ($_GET['start']) {
             $start = str_format_time($_GET['start']);
         }
@@ -109,15 +104,9 @@ class Main extends CI_Controller
             $where = "a.add_time  between  $start and $end";
         } elseif ($start) {
             $where['a.add_time >'] = $start;
-        } elseif ($end )
-
-        {
+        } elseif ($end ) {
             $where['a.add_time <'] = $end;
         }
-
-
-
-
 
         $keywords =trim( $this->input->get('q', TRUE));
         $page = $this->input->get('per_page', TRUE);
@@ -127,7 +116,7 @@ class Main extends CI_Controller
         $pagesize = 10;
 
         $info = $this->Order_model->search($keywords, $page, $pagesize, $where);
-//print_r($info);die;
+        //print_r($info);die;
         $url = '/order/main/search?q=' . $keywords.'&start='.$_GET['start'].'&end='.$_GET['end'];
         $pages = pagesadmin($info['total'], $pagesize, '', $url);
 
@@ -138,7 +127,5 @@ class Main extends CI_Controller
         templates('order', 'index', $info);
         exit;
     }
-
-
 }
 

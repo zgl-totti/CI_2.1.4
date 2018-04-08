@@ -11,7 +11,6 @@ include(APPPATH.'libraries/uptoscioauth.class.php');
 * @return
 */
 class Pubmed extends CI_Controller {
-
 	private $_client;		//	实例化接口
 
 	/**
@@ -23,14 +22,14 @@ class Pubmed extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
+
 		//	uri类
 		$this->_baseurl		=	base_url();
 		$this->_client		=	clientAPI();
 		$this->load->model('Comment_model');
 		$this->load->model('Token_model');
 		$this->load->model('Member_model');
-		
-	
+
 		if ( !$this->_client ) {
 			$this->_client	=	gettoken();
 		}
@@ -46,27 +45,21 @@ class Pubmed extends CI_Controller {
 	*/
 	public function index( ){
 		$page   =   isset($_POST['page']) ? intval($_POST['page']) : 1;
-		
 		$data	=	$this->_client->news($page);
-		
 		$result	=	array();
 		$result['status']	=	'-1';
 		if (!$data) {
 			exit(json_encode($result));
 		}
-		
 		 //  处理 $data 中的时间
         foreach ($data['info'] as $key => $value) {
             $data['info'][$key]['inputtime']    =   $value['inputtime'] ? 
 				date('Y.m.d',$value['inputtime']) : date('Y.m.d');
         }
-
 		$result['status'] = 1;
         $result['info'] = $data;
-		
 		exit(json_encode($result));
 	}
-	
 
 	/**
 	* 业内新闻详情
@@ -77,22 +70,17 @@ class Pubmed extends CI_Controller {
 	*/
 	public function newsshow( ){
 		$id   =   isset($_POST['id']) ? intval($_POST['id']) : '';
-
 		$result	=	array();
 		$result['status']	=	'-1';
 		if ( !$id ) {
 			exit(json_encode($result));
 		}
-
 		$data	=	$this->_client->newsshow($id);
-		
 		if (!$data) {
 			exit(json_encode($result));
 		}
-		
 		$data['inputtime']  =   isset($data['inputtime']) ? date('Y.m.d',$data['inputtime']) 
 			: date('Y.m.d');
-
         $result['status']   =   1;
         $result['info']     =   $data;
 		exit(json_encode($result));
@@ -109,25 +97,19 @@ class Pubmed extends CI_Controller {
      */
     function reports(){
         $office     =   isset($_POST['office'])  ? trim($_POST['office']) : '';
-
         if ( !$office || is_numeric($office) ) {
             $office    =   'neurology';
         }
-        
         $page   =   isset($_POST['page']) ? intval($_POST['page']) : 1;
-
         $data   =   $this->_client->reprots_list($office,$page);
-           
         $result     =   array();
         $result['status'] = '-1';
         if( !$data ){
             exit(json_encode($result));
         }
-
         foreach ($data['info'] as $key => $value) {
             $data['info'][$key]['inputtime']    =   $value['inputtime'] ? date('Y.m.d',$value['inputtime']) : date('Y.m.d');
         }
-
         $result['status']   =   1;
         $result['info']     =   $data;
         exit(json_encode($result));
@@ -143,23 +125,18 @@ class Pubmed extends CI_Controller {
      */
     function reportsshow(){
         $id   =   isset($_POST['id']) ? intval($_POST['id']) : '';
-
         $result     =   array();
         $result['status']   =   '-1';
         if ( !$id ) {
             exit(json_encode($result));
         }
-
         $data   =   $this->_client->reprots_show($id);
-         
         if ( !$data ) {
             exit(json_encode($result));
         }
-
         $data['inputtime']  =   $data['inputtime'] ? date('Y.m.d',$data['inputtime']) : date('Y.m.d');
         $result['status']   =   1;
         $result['info']     =   $data;
-		
         exit(json_encode($result));
     }
 
@@ -211,13 +188,10 @@ class Pubmed extends CI_Controller {
      */
     function medical(){
         $data   =   array();
-       
         $data   =   $this->_client->medical();
-            
         $result             =   array();
         $result['status']   =   1;
         $result['info']     =   $data;
-		
         exit(json_encode($result));
     }
 

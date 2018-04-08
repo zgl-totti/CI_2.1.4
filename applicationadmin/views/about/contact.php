@@ -12,7 +12,6 @@
         <?php $this->load->view('about/top_nav');?>
     </div>
     <div class="container-fluid">
-
         <div class='row-fluid'>
             <div class='span12'>
                 <?php
@@ -25,7 +24,6 @@
                             </ul>
                         </div>
                         <div class="widget-content nopadding">
-
                             <form class="form-horizontal" method="post" action="<?php echo site_aurl('about/main/contact');?>" name="manageuserform" id="manageuserform" novalidate="novalidate"  enctype="multipart/form-data">
                                 <input type='hidden' name='id' id='id' value='<?php echo $info["id"]?>' />
                                 <div class="control-group">
@@ -40,13 +38,10 @@
 									<textarea rows="8" id="contents" name="contents" style='width:50%;' ><?php echo $info['contents'];?></textarea>
 								</div>
 							</div>
-                                
                                 <div class="form-actions">
                                     <input type="submit" value="确定" name="submit" class="btn btn-primary" />
                                 </div>
                             </form>
-
-
                         </div>
                     </div>
                 <?php
@@ -59,12 +54,9 @@
                 }
                 ?>
             </div>
-
         </div>
-
     </div>
 </div>
-
 <script src="<?php echo base_url('statics/admin/js/jquery.validate.js');?>"></script>
 <script>
     $(function(){

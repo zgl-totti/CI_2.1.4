@@ -10,7 +10,6 @@
 * @return
 */
 class Pubmed extends CI_Controller {
-	
 	/**
 	* 
 	* @author	wangyangyang
@@ -21,7 +20,5 @@ class Pubmed extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
-
 	}
-
 }

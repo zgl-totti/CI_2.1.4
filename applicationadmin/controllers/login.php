@@ -20,8 +20,6 @@ class Login extends CI_Controller {
 		parent::__construct();
 		
 		$this->_userid	=	$this->session->userdata('userid');
-
-
 		if ( $this->_userid ) {
 			redirect(site_aurl('admin/main'));
 			exit;
@@ -59,7 +57,6 @@ class Login extends CI_Controller {
 					break;
 			}
 		}
-
 		$this->load->view('login',$data);
 	}
 
@@ -72,7 +69,6 @@ class Login extends CI_Controller {
 	* @return		
 	*/
 	public function loginin(){
-
 		$data	=	$this->input->post(NULL,TRUE);
 	
 		//	登录判断token 防止跨站提交
@@ -109,7 +105,6 @@ class Login extends CI_Controller {
 		}
 
 		if ($userinfo) {
-			
 			//	记录后台操作日志
 			manage_log('login','loginin','','/login/loginin','管理员登录');
 
@@ -120,7 +115,6 @@ class Login extends CI_Controller {
 		redirect(site_aurl('login/index/1'));
 		exit;
 	}
-
 }
 
 /* End of file login.php */

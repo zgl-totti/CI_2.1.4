@@ -23,8 +23,10 @@ class Wxmain extends CI_Controller{
      */
     private $app_id = 'wx669eb16a613703ae';
     private $app_secret = 'f0d01a8b6b07420b95001a0f55acb27a';
+
     public function __construct(){
         parent::__construct();
+
         $this->load->model('Driving_model');
         $this->load->model('Signup_model');
         $this->load->model('Member_model');
@@ -75,9 +77,6 @@ class Wxmain extends CI_Controller{
     public function jinyanka(){
         $this->load->model('About_model');
         $data['about'] = $this->About_model->getone();
-        //echo "<pre>";
-        //print_r($data['about']);
-        //die;
         $this->load->view('default/wxmain/jinyanka', $data);
     }
 
@@ -120,7 +119,7 @@ class Wxmain extends CI_Controller{
         $page = max(1, $page);
         $pagesize = 8;
         $data = $this->commodity_model->search($keywords, $page, $pagesize,'id,name,newprice,oldprice,thumb0');
-        // echo '<pre>';print_r($data);
+
         $url = '/wxmain/chaxun?q=' . $keywords;
         $pages = pages($data['total'], $pagesize, '', $url);
         $this->config->set_item('enable_query_strings', false);
@@ -144,7 +143,6 @@ class Wxmain extends CI_Controller{
         // $date=$data['info'];
         //unset($data['total']);
         echo json_encode($data);
-        //print_r(json_encode($date));
     }
 
     public function dingdan()
@@ -699,7 +697,6 @@ class Wxmain extends CI_Controller{
         $info['keywords'] = $keywords;
         $info['pages'] = $pages;
 
-
         $this->load->vars($info);
         templates('wxmain', 'lordlist');
     }
@@ -735,7 +732,6 @@ class Wxmain extends CI_Controller{
                         $info['info'][] = $v;
                     }
                 }
-
             }
         }
 
@@ -779,47 +775,28 @@ class Wxmain extends CI_Controller{
         $data['title']=$title;
         $data['newprice']=$newprice;*/
         $explode = explode('*', $_SESSION['id']);
-
         $arr1 = array_unique($explode);
-
         $c = $arr1;
-
         $data['aa'] = $this->commodity_model->getshops($c);
-
-
-        //print_r($data);die;
-
-
         templates('wxmain', 'dingdan2', $data);
-
     }
 
 
     public function wsyh()
     {
-
         $this->load->model('About_model');
         $data['about'] = $this->About_model->getone11();
-
-
         templates('wxmain', 'wsyh', $data);
-
     }
 
     public function gzsj()
     {
-
-
         templates('wxmain', 'guanzhushangjia');
-
     }
 
     public function daikuangyewu()
     {
-
         templates('wxmain', 'daikuan');
-
-
     }
 
 
@@ -865,7 +842,6 @@ class Wxmain extends CI_Controller{
         templates('daikuan', 'geren-anjie');
     }
 
-/////111111
     public function daikuan07()
     {
         templates('daikuan', 'loanTransaction');
@@ -1003,7 +979,6 @@ class Wxmain extends CI_Controller{
         templates('daikuan', 'shangyechengdui');
     }
 
-//////////////////////////////////////////////////////
     public function dzyh01()
     {
         templates('dianziyinhang', 'bank');
@@ -1148,8 +1123,6 @@ class Wxmain extends CI_Controller{
         templates('dianziyinhang', 'chaojiyinhang');
     }
 
-
-
     public function zzfbz90()
     {
         templates('dianziyinhang', 'zifei_3');
@@ -1175,12 +1148,10 @@ class Wxmain extends CI_Controller{
         templates('dianziyinhang', 'shoujiyinhang11');
     }
 
-
     public function dzyh110()
     {
         templates('dianziyinhang', 'zifei_3');
     }
-
 
     public function ceshiditu()
     {
@@ -1193,12 +1164,10 @@ class Wxmain extends CI_Controller{
         templates('dianziyinhang', 'zifeiqingkuang');
     }
 
-
     public function dingwei1()
     {
         templates('wangdiancx', '1');
     }
-
 
     public function dingwei2()
     {
@@ -1335,7 +1304,6 @@ class Wxmain extends CI_Controller{
         templates('wangdiancx', '28');
     }
 
-
     public function grqtl()
     {
         templates('wxmain', 'user_other');
@@ -1350,237 +1318,192 @@ class Wxmain extends CI_Controller{
 
     public function user_forest()
     {
-
         templates('wxmain', 'user_forest');
         //templates('wxmain','gerenqitalei');
     }
 
-
     public function shoucang()
     {
-
         templates('wxmain', 'shoucang');
     }
 
     public function dingwei29()
     {
-
         templates('wangdiancx', '29');
     }
 
     public function dingwei30()
     {
-
         templates('wangdiancx', '30');
     }
 
-
     public function dingwei31()
     {
-
         templates('wangdiancx', '31');
     }
 
     public function dingwei32()
     {
-
         templates('wangdiancx', '32');
     }
 
     public function dingwei33()
     {
-
         templates('wangdiancx', '33');
     }
 
     public function dingwei34()
     {
-
         templates('wangdiancx', '34');
     }
 
-
     public function dingwei35()
     {
-
         templates('wangdiancx', '35');
     }
 
     public function dingwei36()
     {
-
         templates('wangdiancx', '36');
     }
 
     public function dingwei37()
     {
-
         templates('wangdiancx', '37');
     }
 
     public function dingwei38()
     {
-
         templates('wangdiancx', '38');
     }
 
     public function dingwei39()
     {
-
         templates('wangdiancx', '39');
     }
 
     public function dingwei40()
     {
-
         templates('wangdiancx', '40');
     }
 
     public function dingwei41()
     {
-
         templates('wangdiancx', '41');
     }
 
     public function dingwei42()
     {
-
         templates('wangdiancx', '42');
     }
 
     public function dingwei43()
     {
-
         templates('wangdiancx', '43');
     }
 
     public function dingwei44()
     {
-
         templates('wangdiancx', '44');
     }
 
     public function dingwei45()
     {
-
         templates('wangdiancx', '45');
     }
 
     public function dingwei46()
     {
-
         templates('wangdiancx', '46');
     }
 
     public function dingwei47()
     {
-
         templates('wangdiancx', '47');
     }
 
     public function dingwei48()
     {
-
         templates('wangdiancx', '48');
     }
 
     public function dingwei49()
     {
-
         templates('wangdiancx', '49');
     }
 
     public function dingwei50()
     {
-
         templates('wangdiancx', '50');
     }
 
     public function dingwei51()
     {
-
         templates('wangdiancx', '51');
     }
 
     public function dingwei52()
     {
-
         templates('wangdiancx', '52');
     }
 
     public function dingwei53()
     {
-
         templates('wangdiancx', '53');
     }
 
     public function dingwei54()
     {
-
         templates('wangdiancx', '54');
     }
 
     public function dingwei55()
     {
-
         templates('wangdiancx', '55');
     }
 
     public function dingwei56()
     {
-
         templates('wangdiancx', '56');
     }
 
     public function dingwei57()
     {
-
         templates('wangdiancx', '57');
     }
 
     public function dingwei58()
     {
-
         templates('wangdiancx', '58');
     }
 
     public function dingwei59()
     {
-
         templates('wangdiancx', '59');
     }
 
     public function dingwei60()
     {
-
         templates('wangdiancx', '60');
     }
 
     public function dingwei61()
     {
-
         templates('wangdiancx', '61');
     }
 
     public function dingwei62()
     {
-
         templates('wangdiancx', '62');
     }
 
     public function dingwei63()
     {
-
         templates('wangdiancx', '63');
     }
-///////////////////////////////
-
-///////////////////////////////
-
 
     public function nguanyuwomen()
     {
-
         templates('wxmain', 'nguanyuwomen');
     }
 
@@ -1589,27 +1512,21 @@ class Wxmain extends CI_Controller{
         templates('wxmain', 'cunkuanlilv');
     }
 
-
     public function ddk()
     {
-
         templates('wxmain', 'nguanyuwomen');
-
     }
 
 
     public function gywm01()
     {
-
         templates('wxmain', 'guanyu_women');
     }
 
     public function jrbld()
     {
-
         templates('wxmain', 'jinrong_bianlidian');
     }
-
 
     public function spjs()
     {
@@ -1618,27 +1535,19 @@ class Wxmain extends CI_Controller{
 
     public function x99991()
     {
-
         templates('wxmain', '9999999');
     }
 
     public function tiaozhuan()
     {
-
-//	redirect('wxmain/tiaozhuan');
-
+        //	redirect('wxmain/tiaozhuan');
         templates('wxmain', 'shenqingchenggong');
-
-//	redirect('wxmain/tiaozhuan');
+        //	redirect('wxmain/tiaozhuan');
     }
 
     public function daikuanchuli()
     {
-
-
         if ($this->input->post('dosubmit', TRUE)) {
-
-
             $data['name'] = $this->input->post('name');
             $data['phone'] = $this->input->post('phone');
             $data['idcard'] = $this->input->post('sfz');//身份证号
@@ -1647,16 +1556,13 @@ class Wxmain extends CI_Controller{
             $data['address'] = $this->input->post('szdz');//地址
             $data['addtime'] = time();
 
-            //print_r($data);die;
             //提交之后发送短信
             //13526432619
             Phone_Msg(13526432619, $data['phone'] . '用户申请了贷款业务，请及时处理。');
             $res = $this->Loan_model->insert($data);
         }
 
-
         if ($res) {
-
             $result['backurl'] = site_url('wxmain/tiaozhuan');
             $result['message'] = '申请成功';
             $result['ms'] = 5;
@@ -1668,53 +1574,35 @@ class Wxmain extends CI_Controller{
             $result['ms'] = 5;
             templates('global', 'message', $result);
         }
-
     }
-
 
     function sendcodes($phone)
     {
-
-
         //	判断手机号是否存在
         if (!preg_match("/^13[0-9]{1}[0-9]{8}$|14[0-9]{1}[0-9]{8}$|15[0-9]{1}[0-9]{8}$|17[0-9]{1}[0-9]{8}$|18[0-9]{1}[0-9]{8}$/", $phone)) {
             $result['status'] = '-1';//手机号格式不对
             exit(json_encode($result));
         }
-
         Phone_Msg(18236918637, $phone . '用户申请了贷款业务:');
-
     }
-
 
     public function daikuan37()
     {
-
-
         templates('wxmain', 'jinyanxiaodaitong');
-
-
     }
 
     public function xdd()
     {
-
-
         templates('wxmain', 'xiangdangdang');
-
-
     }
-
 
     public function bmfw_new()
     {
-
         templates('wxmain', 'bmfw');
     }
 
     public function cklc()
     {
-
         templates('wxmain', 'cklc');
     }
 
@@ -1725,11 +1613,9 @@ class Wxmain extends CI_Controller{
     }
 
     /*中奖概率*/
-
     public function rotate()
     {
         /*判断点击次数*/
-
         $where['openid'] = $_SESSION['openid'];
         $where['addtime <'] = strtotime(date('Ymd')) + 86400;
         $where['addtime >'] = strtotime(date('Ymd'));
@@ -1737,7 +1623,6 @@ class Wxmain extends CI_Controller{
         if ($clicks >= 2) {
             exit(json_encode(88)); //次数用完了
         }
-
         $prize_arr = $this->commodity_model->get_pond();
 
         /*	$prize_arr = array(
@@ -1770,20 +1655,15 @@ class Wxmain extends CI_Controller{
         }
         $res = $prize_arr[$result - 1]['prize']; //中奖项
 
-
         $wininfo = $this->commodity_model->get_win($res);
-
-        //echo $num;die;
         if ($wininfo['num'] > 0) {
             $windata['num'] = $wininfo['num'] - 1;
             $this->commodity_model->upd_win($windata, $res);
         } elseif ($wininfo['num'] == 0) {
-
             $this->commodity_model->del_pond($res);
-
             $this->rotate();
-
         }
+
         /**存进用户中奖表*/
         $uwin['openid'] = $_SESSION['openid'];
         $uwin['gradeid'] = $res;
@@ -1791,10 +1671,6 @@ class Wxmain extends CI_Controller{
         $uwin['addtime'] = time();
         $this->commodity_model->ins_user_win($uwin);
         exit(json_encode($res));
-
-        //$info['status']=666;
-
-
     }
 
     //POS机申请
@@ -1807,7 +1683,6 @@ class Wxmain extends CI_Controller{
             $szdz=$this->input->post('szdz',true);
 
             if($username && $businessLicense && $phone && $address && $szdz){
-             
                 if(preg_match("/^1[34578]{1}\d{9}$/",$phone)){  
                     $data['username']=$username;
                     $data['businessLicense']=$businessLicense;
@@ -1870,7 +1745,5 @@ class Wxmain extends CI_Controller{
         	templates('wxmain', 'posapply');
         }
     }
-
-
 }
 

@@ -23,9 +23,7 @@ class Main extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('Region_model');
-
 		$this->_userid	=	$this->session->userdata('userid');
-
 	}
 
 	/**
@@ -63,8 +61,6 @@ class Main extends CI_Controller {
 			$this->tree->init($array);
 			$data['categorys'] = $this->tree->get_tree(0, $str);
 		}
-		
-	
 		$this->load->view('region/index',$data);
 	}
 	
@@ -79,17 +75,13 @@ class Main extends CI_Controller {
 	public function listorder(){
 		if(isset($_POST['submit']) && $_POST['submit']) {
 			$model_field_sort	=	$this->input->post('listorders',TRUE);
-
 			//	更新排序
 			$listorder	=	$this->Region_model->listorder($model_field_sort);
-			
 			if ( $listorder ) {
 				//	管理员后台操作日志记录
 				manage_log('region','main','listorder','/region/main/listorder','菜单管理排序');
 			}
-
 			$data['message']	=	$listorder  ? 1 : 0;
-			
 			$this->load->view('region/listorder',$data);
 		}else{
 			redirect(site_aurl('region/main'));
@@ -120,7 +112,6 @@ class Main extends CI_Controller {
 				//	管理员后台操作日志记录
 				manage_log('region','main','add','/region/main/add','菜单管理添加新菜单',array('id'=>$insert));
 			}
-
 			$this->load->view('region/add_action',$result);
 		}else{
 			$urlArr	=	get_segment_arr();
@@ -130,9 +121,8 @@ class Main extends CI_Controller {
 			$main	=	$this->Region_model->lists();
 
 			if ( !$main || !$main['info'] ) {
-//				redirect(site_aurl('admin/main'));
+                //redirect(site_aurl('admin/main'));
 			}
-			
 			//	上级菜单下拉选择
 			$array = array();
 			foreach($main['info'] as $r) {
@@ -143,8 +133,6 @@ class Main extends CI_Controller {
 			$str  = "<option value='\$id' \$selected>\$spacer \$cname</option>";
 			$this->tree->init($array);
 			$data['select_categorys'] = $this->tree->get_tree(0, $str);
-			
-
 			$this->load->view('region/add',$data);
 		}
 	}
@@ -180,12 +168,10 @@ class Main extends CI_Controller {
 				//	管理员后台操作日志记录
 				manage_log('region','main','edit','/region/main/edit','菜单管理修改菜单',array('id'=>$post['tableid']));
 			}
-
 			$this->load->view('region/edit_action',$result);
 		}else{
 			$urlArr	=	get_segment_arr();
 			$id		=	isset($urlArr['4']) ? intval($urlArr['4']) : '';
-
 			$this->load->library('tree');
 			
 			//	该字段信息
@@ -207,7 +193,6 @@ class Main extends CI_Controller {
 			$str  = "<option value='\$id' \$selected>\$spacer \$cname</option>";
 			$this->tree->init($array);
 			$data['select_categorys'] = $this->tree->get_tree(0, $str);
-			
 			$this->load->view('region/edit',$data);
 		}
 	}
@@ -224,7 +209,6 @@ class Main extends CI_Controller {
 		$urlArr		=	get_segment_arr();
 		$id			=	isset($urlArr['4']) ? intval($urlArr['4']) : '';
 		$info		=	'';
-
 		$result		=	array();
 		if ( $id ) {
 			//	查看该菜单信息，做日志记录使用

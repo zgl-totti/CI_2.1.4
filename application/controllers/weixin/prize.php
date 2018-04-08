@@ -10,6 +10,7 @@
 */
 class Prize extends CI_Controller {
     private $uid;
+
     /**
      *
      * @author
@@ -19,6 +20,7 @@ class Prize extends CI_Controller {
      */
     public function __construct(){
         parent::__construct();
+
         $result =   array();
         $this->load->model('Wechat_model');
         $this->load->model('Prize_model');
@@ -121,7 +123,6 @@ class Prize extends CI_Controller {
         }else{
             templates('weixin/ggl','accept');
         }
-
     }
 }
 

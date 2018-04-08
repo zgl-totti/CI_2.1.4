@@ -12,6 +12,7 @@
 class Weixininfo extends CI_Controller {
 	//	用户id
 	public $userid;
+
 	/**
 	* 
 	* @author		wangteng
@@ -22,6 +23,7 @@ class Weixininfo extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
+
 		$userid	=	$this->input->cookie('user',true);
         //$this->userid	=	$userid ? aesDecode($userid) : '1';
 		$this->load->model('Weixininfo_model');

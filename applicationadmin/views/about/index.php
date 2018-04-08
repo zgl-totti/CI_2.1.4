@@ -7,14 +7,11 @@
 			<?php $this->load->view('about/top_nav');?> 
 		</div>
 		<div class="container-fluid">
-			
 			<div class='row-fluid'>
 				<div class='span12'>
-				
 					<?php
 						if( isset($info) && $info ){
 					?>
-				
 					<div class="widget-box">
 						<div class="widget-content nopadding">
 						<form method="post" class="form-horizontal ui-formwizard" id="form-wizard" novalidate="novalidate" onsubmit="return CheckPost();" action="<?php echo site_url('about/main/deletes')?>" >
@@ -22,7 +19,7 @@
 								<thead>
 									<tr>
 										<th width='20'>
-												<input type="checkbox" name="title-checkbox" id="title-checkbox">
+                                            <input type="checkbox" name="title-checkbox" id="title-checkbox">
 										</th>
 										<th>ID</th>
 										<th>标题</th>
@@ -43,7 +40,6 @@
 										<td><?php echo $v['auth'];?></td>							
 										<td><?php echo $v['counts'];?></td>
 										<td><?php echo $v['dates'];?></td>
-										
 										<td>
 											<a href='<?php echo site_aurl('about/main/edit/'.$v['id']);?>'>[修改]</a>
 										</td>
@@ -54,7 +50,7 @@
 								</tbody>
 							</table>
 							<div class="form-actions">
-									<input type="submit" value="删除" name="submit" class="btn" />
+                                <input type="submit" value="删除" name="submit" class="btn" />
 							</div>
 							</form>
 						</div>
@@ -66,18 +62,16 @@
 						<button data-dismiss="alert" class="close">×</button>
 						暂无相关专家信息！
 					</div>
-					
-					<?php 
+                    <?php
 						}
-					
 						if(isset($pages) && $pages ) {
-					?>
-					<div class='pagination'>
-						<?php echo $pages;?>
-					</div>
-					<?php
+                        ?>
+                        <div class='pagination'>
+                            <?php echo $pages;?>
+                        </div>
+                        <?php
 						}
-					?>
+                    ?>
 				</div>
 			</div>
 		</div>

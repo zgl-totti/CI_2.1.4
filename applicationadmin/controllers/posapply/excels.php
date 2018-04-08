@@ -10,6 +10,7 @@ header("Content-Type:text/html;charset=utf-8");
 class Excels extends CI_Controller {
 	public $before_filter	=	'admin';
 	public $_userid;
+
 	/**
 	* 
 	* @author		wangyangyang
@@ -21,45 +22,32 @@ class Excels extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 
-//echo   44;die;
 		ini_set('memory_limit', '128M');
 		set_time_limit(0);
 		$this->load->model('posapply_model');
-
 	}
+
 /*****************************导出************************************/
 	public function index(){
-
 		$this->config->set_item('enable_query_strings',TRUE);
 		$keywords	=	$this->input->get('q',TRUE);
-
 		//获取数据
-
 		$data		=	$this->posapply_model->excels_search($where='',$keywords);
-
 		$data['total']	=	$data['total'] ? $data['total'] : 0;
 		$this->config->set_item('enable_query_strings',FALSE);
-
-
 		$user = $data['uid'];
-	//echo '<pre>';	print_r($user);die;
-
 		$this->export($user);
 	}
-
 
 
 	/**********************************************/
 	public function export($ids = '')
 	{
-
-		//print_r($ids) ;die;
 		//引入PHPExcel库文件（路径根据自己情况）
 		include './statics/phpexcel/Classes/PHPExcel.php';
 		//创建对象
 		$this->excel = new PHPExcel();
 		$this->one($ids);
-
 
 		//echo '<pre>';print_r($this->one($ids));die;
 
@@ -89,7 +77,6 @@ class Excels extends CI_Controller {
 			/*if($one[$b]['idcard'] != 0){
 				$one[$b]['idcard']=     " ".$one[$b]['idcard']." " ;
 			}*/
-
 			if($one[$b]['time'] != 0){
 				$one[$b]['time']=date('Y-m-d H:i:s',$one[$b]['time']);
 			}else if($one[$b]['time'] == 0){
@@ -130,6 +117,7 @@ class Excels extends CI_Controller {
 		$this->excel->getActiveSheet()->getColumnDimension('X')->setWidth(40);
 		$this->excel->getActiveSheet()->getColumnDimension('Y')->setWidth(40);
 		$this->excel->getActiveSheet()->getColumnDimension('Z')->setWidth(40);
+
 		//文字左右居中
 		$this->excel->getActiveSheet()->getStyle('A')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		$this->excel->getActiveSheet()->getStyle('B')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -157,12 +145,11 @@ class Excels extends CI_Controller {
 		$this->excel->getActiveSheet()->getStyle('Y')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		$this->excel->getActiveSheet()->getStyle('Z')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-
 		//Excel表格式,这里简略写了8列
 		$this->excel->getActiveSheet()->setTitle('POS机申请信息');
 		$letter = array('A','B','C','D','E','F','G','H','I');
-		//表头数组
 
+		//表头数组
 		$tableheader = array('编号','个人/企业名称','企业营业执照号','联系电话','地址','所在乡镇','申请时间','状态');
 
 		//填充表头信息

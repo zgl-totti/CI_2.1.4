@@ -20,6 +20,7 @@ class Export extends CI_Controller {
 	public $tsheet	=	array('A','B','C','D','E','F','G','H','I','J','K','L','M',
 		'N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL');
 	public $activeSheet	=	0;
+
 	/**
 	* 
 	* @author	wangyangyang
@@ -30,6 +31,7 @@ class Export extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
+
 		$userid	=	$this->input->cookie('user',true);
 		$this->userid	=	$userid ? aesDecode($userid) : '';
 		$this->load->model('Patients_model');
@@ -243,8 +245,6 @@ class Export extends CI_Controller {
 			}
 			$objActSheet->setCellValue($tname.$i, $add_time);
 
-
-
 			//	门诊号
 			$tname	=	$this->tsheet[$t];
 			$t++;
@@ -309,7 +309,6 @@ class Export extends CI_Controller {
 			}
 			$objActSheet->setCellValueExplicit($tname.$i, $symptoms);
 
-
 			//	分布方式 ( 1是近端 2是远端 3是 对称 4是不对称 )
 			$tname	=	$this->tsheet[$t];
 			$t++;
@@ -361,8 +360,6 @@ class Export extends CI_Controller {
 					$bone	=	'';
 			}
 			$objActSheet->setCellValue($tname.$i, $bone);
-			
-
 
 			//	神经内科相关病史 ( 1:中枢神经病变 2:明确的周围神经病变 3:其它 )
 			$tname	=	$this->tsheet[$t];
@@ -382,7 +379,6 @@ class Export extends CI_Controller {
 					$nerve	=	'';
 			}
 			$objActSheet->setCellValue($tname.$i, $nerve);
-			
 
 			//	其他相关病史 ( 1:尿毒症 2:甲状腺功能亢进 3:结核用药史 4:肿瘤化疗用药史  5:长期大量饮酒史 6:遗传病史 7:其他 )
 			$tname	=	$this->tsheet[$t];
@@ -414,7 +410,6 @@ class Export extends CI_Controller {
 					$other	=	'';
 			}
 			$objActSheet->setCellValue($tname.$i, $other);
-
 
 			//	踝反射(左侧) ( 1: 缺失 2：减弱 3：正常 4：亢奋 )
 			$tname	=	$this->tsheet[$t];
@@ -710,10 +705,8 @@ class Export extends CI_Controller {
 			}
 			$objActSheet->setCellValue($tname.$i, $dtime);
 
-
 			$i++;
 			$t	=	0;
 		}
 	}
-
 }

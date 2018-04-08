@@ -24,33 +24,26 @@ class Shops extends CI_Controller {
 
 		$this->load->model('Shops_model');
 		$this->load->model('Commodity_model');
-		
 	}
 
 	public function freexiche(){
-
 		seo('洗车');
 		//	条件
 		$where	=	array();
-		
-		
 		$where['parentid']	=	4;
-
 		$page		=	isset($page) && $page ? intval($page) : 1;
 		$pagesize	=	10;
-		
+
 		//	获取数据
 		$data	=	$this->Shops_model->lists($where,$page,$pagesize,'updatetime DESC');
-
 		$total	=	isset($data['total']) && $data['total'] ? $data['total'] : '';
-		
+
 		//	分页
 		$pages		=	'';
 		if ( $total ) {
 			$pages	=	pages($total ,$pagesize,'4','/wxmains/shops/freexiche/');
 		}
 		$data['pages']	=	$pages ? $pages : '';
-		
 		$data['total']	=	$total ? $total : 0;
 		$this->load->vars($data);
 		templates('wxmain','freexiche');
@@ -93,8 +86,5 @@ class Shops extends CI_Controller {
 		seo('一键移车');
 		templates('wxmain','yiche');
 	}
-
-
-	
 }
 

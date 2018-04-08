@@ -10,6 +10,7 @@
 class Main extends CI_Controller {
 	public $before_filter	=	'admin';
 	public $_userid;
+
 	/**
 	* 
 	* @author		wangyangyang
@@ -20,11 +21,9 @@ class Main extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
+
 		$this->load->model('posapply_model');
-
 		$this->_userid	=	$this->session->userdata('userid');
-
-
 	}
 
 	/**
@@ -36,15 +35,11 @@ class Main extends CI_Controller {
 	* @return		
 	*/
 	public function index($page = ''){
-		//echo 33;die;
 		$page	=	isset($page) ? intval($page) : 1;
 		$page	=	max(1,$page);
 		$pagesize	=	10;
-		
 		$info	=	$this->posapply_model->lists('',$page,$pagesize);
-
 		$pages	=	pages($info['total'],$pagesize,4,'/loan/main/index');
-		
 		$info['pages']	=	$pages;
 		templates('posapply','index',$info);
 		exit;
@@ -161,16 +156,7 @@ class Main extends CI_Controller {
 
 
 
-
-
-
-
-
-
-
-
-
-	public function add( $userid = '' ){ 	// echo "string";die;
+	public function add( $userid = '' ){
 	 	if ( isset($_POST['submit']) && $_POST['submit'] ) {
 			$post	=	$this->input->post(NULL,TRUE);
 

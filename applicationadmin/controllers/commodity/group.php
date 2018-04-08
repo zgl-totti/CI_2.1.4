@@ -23,9 +23,7 @@ class Group extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('Commodity_group_model');
-
 		$this->_userid	=	$this->session->userdata('userid');
-
 	}
 
 	/**
@@ -37,10 +35,9 @@ class Group extends CI_Controller {
 	* @return		
 	*/
 	public function index($parentid = '0'){
-		
 		$where['parentid'] = intval($parentid);
 		$main	=	$this->Commodity_group_model->lists($where);
-		
+
 		$arr	=	array();
 		$data	=	array();
 		$data['categorys']	=	'';
@@ -65,10 +62,7 @@ class Group extends CI_Controller {
 
 			$this->tree->init($array);
 			$data['categorys'] = $this->tree->get_tree($parentid, $str);
-			
 		}
-		
-		
 		$this->load->view('commodity/group/index',$data);
 	}
 	
@@ -83,17 +77,13 @@ class Group extends CI_Controller {
 	public function listorder(){
 		if(isset($_POST['submit']) && $_POST['submit']) {
 			$model_field_sort	=	$this->input->post('listorders',TRUE);
-
 			//	更新排序
 			$listorder	=	$this->Commodity_group_model->listorder($model_field_sort);
-			
 			if ( $listorder ) {
 				//	管理员后台操作日志记录
 				manage_log('commodity','group','listorder','/commodity/group/listorder','商铺组管理排序');
 			}
-
 			$data['message']	=	$listorder  ? 1 : 0;
-			
 			$this->load->view('commodity/group/listorder',$data);
 		}else{
 			redirect(site_aurl('commodity/group'));
@@ -123,7 +113,6 @@ class Group extends CI_Controller {
 				//	管理员后台操作日志记录
 				manage_log('commodity','group','add','/commodity/group/add','商铺组管理添加新商铺组',array('id'=>$insert));
 			}
-
 			$this->load->view('commodity/group/add_action',$result);
 		}else{
 			$urlArr	=	get_segment_arr();
@@ -131,11 +120,9 @@ class Group extends CI_Controller {
 
 			$this->load->library('tree');
 			$main	=	$this->Commodity_group_model->lists();
-
 			if ( !$main || !$main['info'] ) {
-//				redirect(site_aurl('admin/main'));
+                //redirect(site_aurl('admin/main'));
 			}
-			
 			//	上级菜单下拉选择
 			$array = array();
 			foreach($main['info'] as $r) {
@@ -146,8 +133,6 @@ class Group extends CI_Controller {
 			$str  = "<option value='\$id' \$selected>\$spacer \$cname</option>";
 			$this->tree->init($array);
 			$data['select_categorys'] = $this->tree->get_tree(0, $str);
-			
-
 			$this->load->view('commodity/group/add',$data);
 		}
 	}

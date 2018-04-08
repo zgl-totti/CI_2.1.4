@@ -11,6 +11,7 @@ class Test extends CI_Controller{
     //高级功能-》开发者模式-》获取
     private $app_id = 'wx669eb16a613703ae';
     private $app_secret = 'f0d01a8b6b07420b95001a0f55acb27a';
+
 	public function __construct(){
 		parent::__construct();
 	}
@@ -97,6 +98,7 @@ class Test extends CI_Controller{
     public function main(){
         templates('wxmain','index');
     }
+
     /**
      * 获取授权后的微信用户信息
      * 

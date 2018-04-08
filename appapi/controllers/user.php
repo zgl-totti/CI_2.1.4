@@ -25,6 +25,7 @@ class User extends CI_Controller {
 	*/
 	public function __construct(){
 		parent::__construct();
+
 		//	uri类
 		$this->_baseurl		=	base_url();
 		$this->_client		=	clientAPI();

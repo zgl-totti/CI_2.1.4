@@ -196,4 +196,5 @@ class Admin_model extends CI_Model{
 		$affected_rows	=	$this->CI->db->affected_rows();
 		Return $affected_rows;
 	}
+
 }

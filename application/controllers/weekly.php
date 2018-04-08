@@ -10,7 +10,6 @@
 * @return
 */
 class Weekly extends CI_Controller {
-	
 	/**
 	* 
 	* @author	wangyangyang
@@ -20,26 +19,20 @@ class Weekly extends CI_Controller {
 	* @return		
 	*/
 	public function __construct(){
-		
 		parent::__construct();
 
 		$this->load->model('Weekly_model');
-
-		
 	}
 
 	public function index(){
-
 		seo('车友周刊');
 		//	条件
 		$where	=	array();
-		
 		$page		=	isset($page) && $page ? intval($page) : 1;
 		$pagesize	=	10;
 		
 		//	获取数据
 		$data	=	$this->Weekly_model->lists($where,$page,$pagesize,'updatetime DESC');
-
 		$total	=	isset($data['total']) && $data['total'] ? $data['total'] : '';
 		
 		//	分页

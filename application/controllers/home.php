@@ -18,6 +18,7 @@ class Home extends CI_Controller {
 	public $userid;
 
 	public $userinfo;
+
 	/**
 	* 
 	* @author	wangyangyang
@@ -33,7 +34,6 @@ class Home extends CI_Controller {
 		$this->userid	=	$userid ? aesDecode($userid) : '';
         $this->load->model('Assess_model');
 		$this->load->model('Patients_model');
-
 		$this->load->model('Member_model');
 		$this->userinfo = $this->Member_model->userinfo($this->userid);
 	}
@@ -47,13 +47,9 @@ class Home extends CI_Controller {
 	* @return		
 	*/
 	public function index( $page = '' ){
-
-		echo 999;die;
 		seo('信息管理');
-    
 		//	条件
 		$where	=	array();
-		
 		//	筛查中心账户
 		if ( $this->userinfo['group'] == 3 ) {
 			$where['result']	=	$this->userinfo['result'];
@@ -73,19 +69,14 @@ class Home extends CI_Controller {
 		
 		//	获取数据
 		$data	=	$this->Patients_model->lists($where,$page,$pagesize,'update_time DESC');
-
 		$total	=	isset($data['total']) && $data['total'] ? $data['total'] : '';
-		
 		//	分页
 		$pages		=	'';
 		if ( $total ) {
 			$pages	=	pages($total ,$pagesize,'3','/home/index/');
 		}
 		$data['pages']	=	$pages ? $pages : '';
-		
 		$data['total']	=	$total ? $total : 0;
-		
-
 		$data['group']	=	$this->userinfo['group'];
 
 		$this->config->load('patients', TRUE);
@@ -97,7 +88,6 @@ class Home extends CI_Controller {
 			$configs['result9'],$configs['result10'],$configs['result11'],
 			$configs['result12']);
 		$data['hospital']	=	$hos;
-
 		$this->load->vars($data);
 		templates('home','index');
 	}
@@ -116,13 +106,10 @@ class Home extends CI_Controller {
 			redirect('home');
 			exit;
 		}
-
 		if ( isset($_POST['dosubmit']) && $_POST['dosubmit'] ) {
 			$data	=	$this->input->post(NULL,TRUE);
-			
 			$info	=	array();
 			$info	=	$this->postdata($data);
-			
 			//	基本信息
 			$info['status']		=	99;
 			$info['add_time']	=	time();
@@ -203,10 +190,8 @@ class Home extends CI_Controller {
 			}
 
 			$data	=	$this->input->post(NULL,TRUE);
-			
 			//	患者id
 			$pid	=	$this->session->userdata('patentis');
-                        
 			if ( !$pid ) {
 				$result['ms']		=	3000;
 				$result['backurl']	=	site_url('home');
@@ -214,10 +199,8 @@ class Home extends CI_Controller {
 				templates('global','message',$result);
 				exit;
 			}
-
 			$info	=	array();
 			$info	=	$this->postdata($data);
-
 			$info['update_time']	=	time();
 			$where		=	array();
 			//	基本信息
@@ -241,13 +224,11 @@ class Home extends CI_Controller {
 				templates('global','message',$result);
 				exit;
 			}
-
 		}else{
 			if ( !$id ) {
 				redirect('home');
 				exit;
 			}
-			
 			//	判断是否为当前登录医生的患者
 			$where	=	array();
 			$where['id']	=	$id;
@@ -277,7 +258,6 @@ class Home extends CI_Controller {
 				templates('global','message',$message);
 				exit;
 			}
-
 			//	存储患者id到session
 			$this->session->set_userdata('patentis', $id);
 
@@ -310,7 +290,6 @@ class Home extends CI_Controller {
 	* @return		
 	*/
 	private function postdata($data){
-            
 		$info	=	array();
 		//	医院编号
 		$info['result']	=	isset($data['result']) && $data['result'] ? 
@@ -323,19 +302,15 @@ class Home extends CI_Controller {
 		}else{
 			$info['results']	=	'';
 		}
-                
-                //	门诊号
+        //	门诊号
 		$info['hnumber']	=	isset($data['hnumber']) && $data['hnumber'] ? 
 			$data['hnumber'] : '';
-
 		//	住院号
 		$info['ad']	=	isset($data['ad']) && $data['ad'] ? 
 			$data['ad'] : '';
-
 		//	姓名
 		$info['names']	=	isset($data['names']) && $data['names'] ? 
 			$data['names'] : '';
-		
 		//	性别
 		$info['sex']		=	isset($data['sex']) && $data['sex'] ? 
 			intval($data['sex']) : '0';
@@ -344,8 +319,7 @@ class Home extends CI_Controller {
 		}
 		//	年龄
 		$info['age']=	isset($data['age']) && $data['age'] ? intval($data['age']) : '0';
-                
-                //	糖尿病
+		//	糖尿病
 		$info['mellitus']		=	isset($data['mellitus']) && $data['mellitus'] ? 
 			intval($data['mellitus']) : '0';
                 if ($info['mellitus'] && $info['mellitus'] > 2 ) {
@@ -359,15 +333,13 @@ class Home extends CI_Controller {
 		//	主要症状其他
 		$info['symptomsother']	=	isset($data['symptomsother']) && $data['symptomsother'] ? 
 			$data['symptomsother'] : '';
-
-                //	分布方式
+        //	分布方式
 		$info['distr']		=	isset($data['distr']) && $data['distr'] ? 
 			implode(',',$data['distr']) : '';
-		
-                //	判断神经病变症状
+        //	判断神经病变症状
 		$info['changes']	=	isset($data['changes']) && $data['changes'] ? 
 			intval($data['changes']) : '0';
-                //	骨科相关病史
+        //	骨科相关病史
 		$info['bone']		=	isset($data['bone']) && $data['bone'] ? 
 			intval($data['bone']) : '0';
 		if ($info['changes'] && $info['changes'] > 2 ) {
@@ -377,7 +349,7 @@ class Home extends CI_Controller {
 		$info['boneother']	=	isset($data['boneother']) && $data['boneother'] ? 
 			$data['boneother'] : '';
 
-                //	神经内科相关病史
+        //	神经内科相关病史
 		$info['nerve']		=	isset($data['nerve']) && $data['nerve'] ? 
 			intval($data['nerve']) : '0';
 		if ($info['changes'] && $info['changes'] > 2 ) {

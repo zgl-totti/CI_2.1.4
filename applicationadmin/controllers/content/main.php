@@ -24,7 +24,6 @@ class Main extends CI_Controller {
 		parent::__construct();
 		
 		$this->_userid	=	$this->session->userdata('userid');
-
 	}
 
 	/**
@@ -76,8 +75,5 @@ class Main extends CI_Controller {
 	public function delnews(){
 		
 	}
-	
-	
-	
 }
 

@@ -10,6 +10,7 @@
 */
 class Integral extends CI_Controller {
     private $uid;
+
     /**
      *
      * @author
@@ -19,6 +20,7 @@ class Integral extends CI_Controller {
      */
     public function __construct(){
         parent::__construct();
+
         $result =   array();
         $this->load->model('Wechat_model');
     }
